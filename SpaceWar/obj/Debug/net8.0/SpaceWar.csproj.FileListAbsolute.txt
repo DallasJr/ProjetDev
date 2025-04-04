@@ -31,3 +31,4 @@ C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\main_
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\main_slow_left.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\main_slow_right.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\projectile_1.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\obj\Debug\net8.0\SpaceWar.sourcelink.json
