@@ -1,0 +1,9 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/DefaultFont.spritefont","C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/bin/DesktopGL/DefaultFont.xnb","FontDescriptionProcessor","SpriteFontContent",826,79200,0,5510814
+"C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_idle.png","C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/bin/DesktopGL/main_idle.xnb","TextureProcessor","Texture2DContent",1247,11221,0,0260983
+"C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_left.png","C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/bin/DesktopGL/main_left.xnb","TextureProcessor","Texture2DContent",1351,11221,0,0070756
+"C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_moving.png","C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/bin/DesktopGL/main_moving.xnb","TextureProcessor","Texture2DContent",1260,11221,0,0063204
+"C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_right.png","C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/bin/DesktopGL/main_right.xnb","TextureProcessor","Texture2DContent",1375,11221,0,0047012
+"C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_slow_left.png","C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/bin/DesktopGL/main_slow_left.xnb","TextureProcessor","Texture2DContent",1311,11221,0,0126318
+"C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_slow_right.png","C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/bin/DesktopGL/main_slow_right.xnb","TextureProcessor","Texture2DContent",1368,11221,0,0043949
+"C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/projectile_1.png","C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/bin/DesktopGL/projectile_1.xnb","TextureProcessor","Texture2DContent",282,1309,0,0460609
