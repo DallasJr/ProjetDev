@@ -12,8 +12,22 @@
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_slow_left.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_slow_right.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/projectile_1.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/projectile_2.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_idle.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_left.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_moving.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_right.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_slow_left.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_slow_right.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

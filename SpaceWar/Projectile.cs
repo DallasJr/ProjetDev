@@ -11,16 +11,19 @@ namespace SpaceWar {
         public float Speed = 10f;
         private Texture2D texture;
         
-        private float rotation; 
+        private float rotation;
+        private int playerIndex;
 
-        public Projectile(Vector2 position, float angle) {
+        public Projectile(Vector2 position, float angle, int index) {
             Position = position;
             rotation = angle;
+            playerIndex = index;
             Velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * Speed;
         }
 
         public void LoadContent(ContentManager content) {
-            texture = content.Load<Texture2D>("projectile_1");
+            if (playerIndex == 0) texture = content.Load<Texture2D>("projectile_1");
+            else texture = content.Load<Texture2D>("projectile_2");
         }
 
         public void Update(GameTime gameTime) {

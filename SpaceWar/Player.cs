@@ -23,25 +23,36 @@ namespace SpaceWar {
         
         private List<Projectile> projectiles = new List<Projectile>();
         private float lastFireTime = 0f;
+        private int playerIndex;
         
         private ContentManager contentManager;
 
-        public Player(Vector2 startPosition, Keys up, Keys left, Keys right, Keys fire) {
+        public Player(Vector2 startPosition, Keys up, Keys left, Keys right, Keys fire, int index) {
             Position = startPosition;
             forwardKey = up;
             leftKey = left;
             rightKey = right;
             fireKey = fire;
+            playerIndex = index;
         }
 
         public void LoadContent(ContentManager content) {
             contentManager = content;
-            idle = content.Load<Texture2D>("main_idle");
-            moving = content.Load<Texture2D>("main_moving");
-            left = content.Load<Texture2D>("main_left");
-            right = content.Load<Texture2D>("main_right");
-            slow_left = content.Load<Texture2D>("main_slow_left");
-            slow_right = content.Load<Texture2D>("main_slow_right");
+            if (playerIndex == 0) {
+                idle = content.Load<Texture2D>("main_idle");
+                moving = content.Load<Texture2D>("main_moving");
+                left = content.Load<Texture2D>("main_left");
+                right = content.Load<Texture2D>("main_right");
+                slow_left = content.Load<Texture2D>("main_slow_left");
+                slow_right = content.Load<Texture2D>("main_slow_right");
+            } else {
+                idle = content.Load<Texture2D>("sec_idle");
+                moving = content.Load<Texture2D>("sec_moving");
+                left = content.Load<Texture2D>("sec_left");
+                right = content.Load<Texture2D>("sec_right");
+                slow_left = content.Load<Texture2D>("sec_slow_left");
+                slow_right = content.Load<Texture2D>("sec_slow_right");
+            }
             texture = idle;
         }
 
@@ -89,7 +100,7 @@ namespace SpaceWar {
             Vector2 offset = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)) * offsetDistance;
             Vector2 projectilePosition = Position + offset;
 
-            Projectile projectile = new Projectile(projectilePosition, Rotation);
+            Projectile projectile = new Projectile(projectilePosition, Rotation, playerIndex);
             projectile.LoadContent(contentManager);
             projectiles.Add(projectile);
         }

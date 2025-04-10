@@ -8,8 +8,8 @@ namespace SpaceWar {
         private Player player1, player2;
 
         public GameScreen(Game1 game) : base(game) {
-            player1 = new Player(new Vector2(100, 300), Keys.Z, Keys.Q, Keys.D, Keys.Space);
-            player2 = new Player(new Vector2(700, 300), Keys.Up, Keys.Left, Keys.Right, Keys.RightControl);
+            player1 = new Player(new Vector2(100, 300), Keys.Z, Keys.Q, Keys.D, Keys.Space, 0);
+            player2 = new Player(new Vector2(700, 300), Keys.Up, Keys.Left, Keys.Right, Keys.RightControl, 1);
         }
 
         public override void LoadContent(ContentManager content) {
