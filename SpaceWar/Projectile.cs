@@ -14,6 +14,8 @@ namespace SpaceWar {
         private float rotation;
         private int playerIndex;
 
+        public int OwnerIndex => playerIndex;
+
         public Projectile(Vector2 position, float angle, int index) {
             Position = position;
             rotation = angle;

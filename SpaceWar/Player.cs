@@ -15,7 +15,7 @@ namespace SpaceWar {
 
         public Vector2 Position;
         public float Rotation;
-        public int Health = 100;
+        private int health = 100;
 
         private Texture2D idle, moving, left, right, slow_left, slow_right;
         private Texture2D texture;
@@ -27,6 +27,23 @@ namespace SpaceWar {
         
         private ContentManager contentManager;
 
+        private float hitFlashTimer = 0f;
+        private const float HitFlashDuration = 0.2f;
+
+        public List<Projectile> GetProjectiles() => projectiles;
+
+        public int Health {
+            get => health;
+            set {
+                if (value < health) {
+                    hitFlashTimer = HitFlashDuration;
+                }
+                health = value;
+            }
+        }
+
+        public bool IsFlashing => hitFlashTimer > 0;
+
         public Player(Vector2 startPosition, Keys up, Keys left, Keys right, Keys fire, int index) {
             Position = startPosition;
             forwardKey = up;
@@ -34,6 +51,15 @@ namespace SpaceWar {
             rightKey = right;
             fireKey = fire;
             playerIndex = index;
+        }
+
+        public Rectangle GetBounds() {
+            return new Rectangle(
+                (int)(Position.X - texture.Width / 2),
+                (int)(Position.Y - texture.Height / 2),
+                texture.Width,
+                texture.Height
+            );
         }
 
         public void LoadContent(ContentManager content) {
@@ -85,6 +111,8 @@ namespace SpaceWar {
                 projectile.Update(gameTime);
             }
             projectiles.RemoveAll(p => !p.Active);
+
+            if (hitFlashTimer > 0) hitFlashTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
         public void Draw(SpriteBatch spriteBatch) {

@@ -39,3 +39,9 @@ C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\sec_m
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\sec_right.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\sec_slow_left.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\sec_slow_right.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\background.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\nebula_1.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\nebula_2.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\stars_1.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\stars_2.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\explosion-5.xnb

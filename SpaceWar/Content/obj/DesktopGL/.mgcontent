@@ -4,13 +4,16 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/background.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/DefaultFont.spritefont</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-5.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_idle.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_left.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_moving.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_right.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_slow_left.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_slow_right.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/nebula_2.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/projectile_1.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/projectile_2.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_idle.png</File>
@@ -19,8 +22,15 @@
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_right.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_slow_left.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_slow_right.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/stars_1.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/stars_2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

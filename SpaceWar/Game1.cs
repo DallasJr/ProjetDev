@@ -10,6 +10,8 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private Screen currentScreen;
 
+    public SpriteFont Font { get; private set; }
+
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -29,6 +31,9 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+        Font = Content.Load<SpriteFont>("DefaultFont");
+        currentScreen.LoadContent(Content);
+
         currentScreen.LoadContent(Content);
     }
 
