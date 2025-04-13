@@ -29,11 +29,11 @@ namespace SpaceWar {
         private Texture2D idle, moving, left, right, slow_left, slow_right;
         private Texture2D texture;
         private Keys forwardKey, leftKey, rightKey, fireKey, boostKey;
-        
+
         private List<Projectile> projectiles = new List<Projectile>();
         private float lastFireTime = 0f;
         private int playerIndex;
-        
+
         private ContentManager contentManager;
 
         private float hitFlashTimer = 0f;
@@ -42,6 +42,8 @@ namespace SpaceWar {
         private float boost = MaxBoost;
         private float boostKeyReleaseTimer = 0f;
         private bool isBoosting = false;
+
+        private Rectangle arenaBounds;
 
         public List<Projectile> GetProjectiles() => projectiles;
 
@@ -63,7 +65,7 @@ namespace SpaceWar {
         public float GetBoost() => boost;
         public float GetMaxBoost() => MaxBoost;
 
-        public Player(Vector2 startPosition, Keys up, Keys left, Keys right, Keys fire, Keys boost, int index) {
+        public Player(Vector2 startPosition, Keys up, Keys left, Keys right, Keys fire, Keys boost, int index, Rectangle arenaBounds) {
             Position = startPosition;
             Velocity = Vector2.Zero;
             forwardKey = up;
@@ -72,6 +74,8 @@ namespace SpaceWar {
             fireKey = fire;
             boostKey = boost;
             playerIndex = index;
+            this.arenaBounds = arenaBounds;
+            if (playerIndex == 0) Rotation = MathHelper.Pi;
         }
 
         public Circle GetBounds() {
@@ -80,28 +84,19 @@ namespace SpaceWar {
 
         public void LoadContent(ContentManager content) {
             contentManager = content;
-            if (playerIndex == 0) {
-                idle = content.Load<Texture2D>("main_idle");
-                moving = content.Load<Texture2D>("main_moving");
-                left = content.Load<Texture2D>("main_left");
-                right = content.Load<Texture2D>("main_right");
-                slow_left = content.Load<Texture2D>("main_slow_left");
-                slow_right = content.Load<Texture2D>("main_slow_right");
-            } else {
-                idle = content.Load<Texture2D>("sec_idle");
-                moving = content.Load<Texture2D>("sec_moving");
-                left = content.Load<Texture2D>("sec_left");
-                right = content.Load<Texture2D>("sec_right");
-                slow_left = content.Load<Texture2D>("sec_slow_left");
-                slow_right = content.Load<Texture2D>("sec_slow_right");
-            }
+            string prefix = playerIndex == 0 ? "main_" : "sec_";
+            idle = content.Load<Texture2D>(prefix + "idle");
+            moving = content.Load<Texture2D>(prefix + "moving");
+            left = content.Load<Texture2D>(prefix + "left");
+            right = content.Load<Texture2D>(prefix + "right");
+            slow_left = content.Load<Texture2D>(prefix + "slow_left");
+            slow_right = content.Load<Texture2D>(prefix + "slow_right");
             texture = idle;
         }
 
         public void Update(GameTime gameTime) {
             KeyboardState  keyboard = Keyboard.GetState();
-            Texture2D finalTexture = idle;
-
+            float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float speed = Speed;
             float cosRotation = (float)Math.Cos(Rotation);
             float sinRotation = (float)Math.Sin(Rotation);
@@ -112,24 +107,24 @@ namespace SpaceWar {
                 isBoosting = true;
                 boostKeyReleaseTimer = 0f;
             } else {
-                boostKeyReleaseTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                boostKeyReleaseTimer += elapsedTime;
             }
 
             if (keyboard.IsKeyDown(forwardKey)) {
-                Velocity += new Vector2(cosRotation, sinRotation) * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                finalTexture = moving;
+                Velocity += new Vector2(cosRotation, sinRotation) * speed * elapsedTime;
+                texture = moving;
             }
             if (keyboard.IsKeyDown(leftKey) && !keyboard.IsKeyDown(rightKey)) {
                 Rotation -= keyboard.IsKeyDown(forwardKey) ? FastRotationSpeed : SlowRotationSpeed;
-                finalTexture = keyboard.IsKeyDown(forwardKey) ? left : slow_left;
+                texture = keyboard.IsKeyDown(forwardKey) ? left : slow_left;
             }
             if (!keyboard.IsKeyDown(leftKey) && keyboard.IsKeyDown(rightKey)) {
                 Rotation += keyboard.IsKeyDown(forwardKey) ? FastRotationSpeed : SlowRotationSpeed;
-                finalTexture = keyboard.IsKeyDown(forwardKey) ? right : slow_right;
+                texture = keyboard.IsKeyDown(forwardKey) ? right : slow_right;
             }
-            texture = finalTexture;
             Velocity *= Friction;
             Position += Velocity;
+            Position = Vector2.Clamp(Position, new Vector2(arenaBounds.Left, arenaBounds.Top), new Vector2(arenaBounds.Right, arenaBounds.Bottom));
 
             if (keyboard.IsKeyDown(fireKey) && gameTime.TotalGameTime.TotalSeconds - lastFireTime > FireCooldown) {
                 if (bullets > 0) {
@@ -138,22 +133,25 @@ namespace SpaceWar {
                     lastFireTime = (float)gameTime.TotalGameTime.TotalSeconds;
                 }
             }
-            foreach (var projectile in projectiles) {
+            for (int i = projectiles.Count - 1; i >= 0; i--) {
+                var projectile = projectiles[i];
                 projectile.Update(gameTime);
+                if (!projectile.Active) {
+                    projectiles.RemoveAt(i);
+                }
             }
-            projectiles.RemoveAll(p => !p.Active);
 
             if (isBoosting) {
-                boost -= 60f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                boost -= 60f * elapsedTime;
                 if (boost < 0) boost = 0;
             } else {
                 if (boostKeyReleaseTimer >= BoostRegenDelay && boost < MaxBoost) {
-                    float boostIncrement = 50f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    float boostIncrement = 50f * elapsedTime;
                     boost = Math.Min(boost + boostIncrement, MaxBoost);
                 }
             }
 
-            bulletRechargeTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            bulletRechargeTimer += elapsedTime;
             if (bulletRechargeTimer >= BulletRechargeInterval) {
                 bulletRechargeTimer = 0f;
                 if (bullets < MaxBullets) {
@@ -161,7 +159,7 @@ namespace SpaceWar {
                 }
             }
 
-            if (hitFlashTimer > 0) hitFlashTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (hitFlashTimer > 0) hitFlashTimer -= elapsedTime;
         }
 
 

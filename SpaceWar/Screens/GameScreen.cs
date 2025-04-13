@@ -10,18 +10,28 @@ namespace SpaceWar {
         private Player player1, player2;
         private Texture2D pixel;
 
-        private Texture2D backgroundTexture;
-        private Texture2D nebulaTexture;
-        private Texture2D stars1Texture;
-        private Texture2D stars2Texture;
+        private Texture2D backgroundTexture, nebulaTexture, stars1Texture, stars2Texture;
 
-        private List<Explosion> explosions;
+        private List<Explosion> explosions = new();
         private ContentManager contentManager;
+        private Rectangle arenaBounds;
 
         public GameScreen(Game1 game) : base(game) {
-            player1 = new Player(new Vector2(100, 300), Keys.Z, Keys.Q, Keys.D, Keys.Space, Keys.LeftShift, 0);
-            player2 = new Player(new Vector2(700, 300), Keys.Up, Keys.Left, Keys.Right, Keys.RightControl, Keys.RightAlt, 1);
-            explosions = new List<Explosion>();
+            arenaBounds = new Rectangle(-10, -10, 1290, 730);
+            Vector2 arenaCenter = new Vector2(
+                arenaBounds.Left + arenaBounds.Width / 2f,
+                arenaBounds.Top + arenaBounds.Height / 2f
+            );
+            Vector2 leftHalfCenter = new Vector2(
+                arenaBounds.Left + arenaBounds.Width / 4f,
+                arenaCenter.Y
+            );
+            Vector2 rightHalfCenter = new Vector2(
+                arenaBounds.Left + 3 * arenaBounds.Width / 4f,
+                arenaCenter.Y
+            );
+            player1 = new Player(leftHalfCenter, Keys.Z, Keys.Q, Keys.D, Keys.Space, Keys.LeftShift, 0, arenaBounds);
+            player2 = new Player(rightHalfCenter, Keys.Up, Keys.Left, Keys.Right, Keys.RightControl, Keys.RightAlt, 1, arenaBounds);
         }
 
         public override void LoadContent(ContentManager content) {
@@ -46,11 +56,9 @@ namespace SpaceWar {
                 game.ChangeScreen(new EndScreen(game, player1, player2));
             }
 
-            foreach (var explosion in explosions.ToArray()) {
-                explosion.Update(gameTime);
-                if (explosion.IsExpired()) {
-                    explosions.Remove(explosion);
-                }
+            for (int i = explosions.Count - 1; i >= 0; i--) {
+                explosions[i].Update(gameTime);
+                if (explosions[i].IsExpired()) explosions.RemoveAt(i);
             }
             
             CheckProjectileCollisions();
@@ -59,9 +67,7 @@ namespace SpaceWar {
         public override void Draw(SpriteBatch spriteBatch) {
             DrawBackground(spriteBatch);
 
-            foreach (var explosion in explosions) {
-                explosion.Draw(spriteBatch);
-            }
+            foreach (var explosion in explosions) explosion.Draw(spriteBatch);
 
             player1.Draw(spriteBatch);
             player2.Draw(spriteBatch);
@@ -86,23 +92,16 @@ namespace SpaceWar {
         private void DrawBackground(SpriteBatch spriteBatch) {
             spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White);
             spriteBatch.Draw(nebulaTexture, new Rectangle(0, 0, 1280, 720), Color.White);
-            for (int x = 0; x < 1280; x += stars1Texture.Width) {
-                for (int y = 0; y < 720; y += stars1Texture.Height) {
+            for (int x = 0; x < 1280; x += stars1Texture.Width)
+                for (int y = 0; y < 720; y += stars1Texture.Height)
                     spriteBatch.Draw(stars1Texture, new Vector2(x, y), Color.White);
-                }
-            }
-            for (int x = 0; x < 1280; x += stars2Texture.Width) {
-                for (int y = 0; y < 720; y += stars2Texture.Height) {
+            for (int x = 0; x < 1280; x += stars2Texture.Width)
+                for (int y = 0; y < 720; y += stars2Texture.Height)
                     spriteBatch.Draw(stars2Texture, new Vector2(x, y), Color.White);
-                }
-            }
         }
 
         private void DrawUI(SpriteBatch spriteBatch) {
-            int barWidth = 200;
-            int healthBarHeight = 20;
-            int maxHealth = 100;
-            int boostBarHeight = 5;
+            const int barWidth = 200, healthBarHeight = 20, boostBarHeight = 5, maxHealth = 100;
 
             Color bulletTextColor1 = player1.GetBulletCount() == 0 ? Color.Red : Color.White;
             Color bulletTextColor2 = player2.GetBulletCount() == 0 ? Color.Red : Color.White;
@@ -152,12 +151,8 @@ namespace SpaceWar {
             foreach (var projectile1 in projectiles1) {
                 foreach (var projectile2 in projectiles2) {
                     if (projectile1.Active && projectile2.Active && CirclesIntersect(projectile1.GetBounds(), projectile2.GetBounds())) {
-                        Explosion explosion1 = new Explosion(projectile1.Position);
-                        explosion1.LoadContent(contentManager);
-                        explosions.Add(explosion1);
-                        Explosion explosion2 = new Explosion(projectile2.Position);
-                        explosion2.LoadContent(contentManager);
-                        explosions.Add(explosion2);
+                        AddExplosion(projectile1.Position);
+                        AddExplosion(projectile2.Position);
                     
                         projectile1.Active = false;
                         projectile2.Active = false;
@@ -166,34 +161,30 @@ namespace SpaceWar {
             }
 
             foreach (var projectile in projectiles1) {
-                if (projectile.Active && projectile.OwnerIndex != 1 &&
-                    CirclesIntersect(projectile.GetBounds(), player2.GetBounds())) {
-
-                    Explosion explosion = new Explosion(projectile.Position);
-                    explosion.LoadContent(contentManager);
-                    explosions.Add(explosion);
+                if (projectile.Active && projectile.OwnerIndex != 1 && CirclesIntersect(projectile.GetBounds(), player2.GetBounds())) {
+                    AddExplosion(projectile.Position);
                     projectile.Active = false;
                     player2.Health -= 10;
                 }
             }
 
             foreach (var projectile in projectiles2) {
-                if (projectile.Active && projectile.OwnerIndex != 0 &&
-                    CirclesIntersect(projectile.GetBounds(), player1.GetBounds())) {
-                
-                    Explosion explosion = new Explosion(projectile.Position);
-                    explosion.LoadContent(contentManager);
-                    explosions.Add(explosion);
+                if (projectile.Active && projectile.OwnerIndex != 0 && CirclesIntersect(projectile.GetBounds(), player1.GetBounds())) {
+                    AddExplosion(projectile.Position);
                     projectile.Active = false;
                     player1.Health -= 10;
                 }
             }
         }
 
-        public static bool CirclesIntersect(Circle circle1, Circle circle2) {
-            float distance = Vector2.Distance(circle1.Center, circle2.Center);
-            return distance < (circle1.Radius + circle2.Radius);
+        private void AddExplosion(Vector2 position) {
+            var explosion = new Explosion(position);
+            explosion.LoadContent(contentManager);
+            explosions.Add(explosion);
         }
+
+        public static bool CirclesIntersect(Circle circle1, Circle circle2) =>
+            Vector2.Distance(circle1.Center, circle2.Center) < (circle1.Radius + circle2.Radius);
 
         public void DrawCircle(SpriteBatch spriteBatch, Circle circle, Color color) {
             Texture2D circleTexture = contentManager.Load<Texture2D>("circle_texture");
