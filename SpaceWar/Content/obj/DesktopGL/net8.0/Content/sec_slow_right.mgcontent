@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_slow_right.png</SourceFile>
-  <SourceTime>2025-04-11T01:18:28.1625701+02:00</SourceTime>
+  <SourceTime>2025-04-13T17:21:06.9334057+02:00</SourceTime>
   <DestFile>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/bin/DesktopGL/Content/sec_slow_right.xnb</DestFile>
-  <DestTime>2025-04-11T01:34:55.7058593+02:00</DestTime>
+  <DestTime>2025-04-13T17:21:54.9689296+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-16T19:05:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

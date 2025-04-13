@@ -45,3 +45,4 @@ C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\nebul
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\stars_1.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\stars_2.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\explosion-5.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\circle_texture.xnb

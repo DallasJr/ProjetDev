@@ -40,8 +40,8 @@ namespace SpaceWar {
                     new Vector2(texture.Width / 2, texture.Height / 2), 1f, SpriteEffects.None, 0f);
         }
 
-        public Rectangle GetBounds() {
-            return new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
+        public Circle GetBounds() {
+            return new Circle(Position, 5f);
         }
     }
 }
