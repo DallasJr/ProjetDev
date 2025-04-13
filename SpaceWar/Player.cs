@@ -18,6 +18,8 @@ namespace SpaceWar {
         private const float MaxBoost = 100f;
         private const float BoostRegenDelay = 3f;
         private const float Friction = 0.95f;
+        private const float HealthRegenDelay = 5f;
+        private const float HealthRegenInterval = 2f;
 
         public Vector2 Position;
         public Vector2 Velocity;
@@ -25,6 +27,7 @@ namespace SpaceWar {
         private int health = 100;
         private int bullets = 0;
         private float bulletRechargeTimer = 0f;
+        private float healthRegenTimer = 0f;
 
         private Texture2D idle, moving, left, right, slow_left, slow_right;
         private Texture2D texture;
@@ -52,6 +55,7 @@ namespace SpaceWar {
             set {
                 if (value < health) {
                     hitFlashTimer = HitFlashDuration;
+                    healthRegenTimer = 0f;
                 }
                 health = value;
             }
@@ -113,6 +117,8 @@ namespace SpaceWar {
             if (keyboard.IsKeyDown(forwardKey)) {
                 Velocity += new Vector2(cosRotation, sinRotation) * speed * elapsedTime;
                 texture = moving;
+            } else {
+                texture = idle;
             }
             if (keyboard.IsKeyDown(leftKey) && !keyboard.IsKeyDown(rightKey)) {
                 Rotation -= keyboard.IsKeyDown(forwardKey) ? FastRotationSpeed : SlowRotationSpeed;
@@ -159,6 +165,14 @@ namespace SpaceWar {
                 }
             }
 
+            healthRegenTimer += elapsedTime;
+            if (healthRegenTimer >= HealthRegenDelay + HealthRegenInterval) {
+                healthRegenTimer = HealthRegenDelay;
+                if (health < 100) {
+                    health += 10;
+                }
+            }
+
             if (hitFlashTimer > 0) hitFlashTimer -= elapsedTime;
         }
 
@@ -179,7 +193,7 @@ namespace SpaceWar {
             Vector2 offset = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)) * offsetDistance;
             Vector2 projectilePosition = Position + offset;
 
-            Projectile projectile = new Projectile(projectilePosition, Rotation, playerIndex);
+            Projectile projectile = new Projectile(projectilePosition, Rotation, playerIndex, 10f);
             projectile.LoadContent(contentManager);
             projectiles.Add(projectile);
         }

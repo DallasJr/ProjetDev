@@ -8,7 +8,7 @@ namespace SpaceWar {
         public Vector2 Position;
         public Vector2 Velocity;
         public bool Active = true;
-        public float Speed = 10f;
+        public float Speed;
         private Texture2D texture;
         
         private float rotation;
@@ -16,9 +16,10 @@ namespace SpaceWar {
 
         public int OwnerIndex => playerIndex;
 
-        public Projectile(Vector2 position, float angle, int index) {
+        public Projectile(Vector2 position, float angle, int index, float speed) {
             Position = position;
             rotation = angle;
+            Speed = speed;
             playerIndex = index;
             Velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * Speed;
         }
