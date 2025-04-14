@@ -18,8 +18,8 @@ namespace SpaceWar {
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.DrawString(game.Font, "BORNE D'ARCADE", new Vector2(100, 100), Color.White);
-            spriteBatch.DrawString(game.Font, "Appuyez sur [ENTRÉE] pour commencer", new Vector2(100, 150), Color.White);
+            spriteBatch.DrawString(game.TitleFont, "BORNE D'ARCADE", new Vector2(100, 100), Color.White);
+            spriteBatch.DrawString(game.MidFont, "Appuyez sur [ENTRÉE] pour commencer", new Vector2(100, 150), Color.White);
         }
     }
 }

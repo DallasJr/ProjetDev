@@ -23,7 +23,6 @@ C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\obj\Debug\net8.0\refint\SpaceW
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\obj\Debug\net8.0\SpaceWar.pdb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\obj\Debug\net8.0\SpaceWar.genruntimeconfig.cache
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\obj\Debug\net8.0\ref\SpaceWar.dll
-C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\DefaultFont.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\main_idle.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\main_left.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\main_moving.xnb
@@ -46,3 +45,7 @@ C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\stars
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\stars_2.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\explosion-5.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\circle_texture.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\MidFont.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\TextFont.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\TitleFont.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\trophy.xnb

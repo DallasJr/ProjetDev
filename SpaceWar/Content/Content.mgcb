@@ -37,13 +37,6 @@
 /processorParam:TextureFormat=Color
 /build:circle_texture.png
 
-#begin DefaultFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:DefaultFont.spritefont
-
 #begin explosion-5.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -127,6 +120,13 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:main_slow_right.png
+
+#begin MidFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:MidFont.spritefont
 
 #begin nebula_2.png
 /importer:TextureImporter
@@ -259,4 +259,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:stars_2.png
+
+#begin TextFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:TextFont.spritefont
+
+#begin TitleFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:TitleFont.spritefont
+
+#begin trophy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:trophy.png
 

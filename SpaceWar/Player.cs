@@ -26,6 +26,7 @@ namespace SpaceWar {
         public float Rotation;
         private int health = 100;
         private int bullets = 0;
+        public string Username;
         private float bulletRechargeTimer = 0f;
         private float healthRegenTimer = 0f;
 
@@ -69,7 +70,14 @@ namespace SpaceWar {
         public float GetBoost() => boost;
         public float GetMaxBoost() => MaxBoost;
 
-        public Player(Vector2 startPosition, Keys up, Keys left, Keys right, Keys fire, Keys boost, int index, Rectangle arenaBounds) {
+        public int TotalBulletsFired { get; private set; } = 0;
+        public int TotalDamageDealt { get; set; } = 0;
+        public float TimeInMotion { get; private set; } = 0f;
+
+        public bool Winner { get; set; } = false;
+
+        public Player(string username, Vector2 startPosition, Keys up, Keys left, Keys right, Keys fire, Keys boost, int index, Rectangle arenaBounds) {
+            Username = username;
             Position = startPosition;
             Velocity = Vector2.Zero;
             forwardKey = up;
@@ -116,6 +124,7 @@ namespace SpaceWar {
 
             if (keyboard.IsKeyDown(forwardKey)) {
                 Velocity += new Vector2(cosRotation, sinRotation) * speed * elapsedTime;
+                if (!Winner) TimeInMotion += elapsedTime;
                 texture = moving;
             } else {
                 texture = idle;
@@ -166,7 +175,7 @@ namespace SpaceWar {
             }
 
             healthRegenTimer += elapsedTime;
-            if (healthRegenTimer >= HealthRegenDelay + HealthRegenInterval) {
+            if (healthRegenTimer >= HealthRegenDelay + HealthRegenInterval && !Winner) {
                 healthRegenTimer = HealthRegenDelay;
                 if (health < 100) {
                     health += 10;
@@ -189,7 +198,8 @@ namespace SpaceWar {
         }
 
         private void FireProjectile() {
-            float offsetDistance = 20f;
+            if (!Winner) TotalBulletsFired++;
+            float offsetDistance = 15f;
             Vector2 offset = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)) * offsetDistance;
             Vector2 projectilePosition = Position + offset;
 

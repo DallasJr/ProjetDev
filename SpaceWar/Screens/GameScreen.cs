@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 namespace SpaceWar {
     public class GameScreen : Screen {
         private Player player1, player2;
+        private float gameDuration = 0f;
         private Texture2D pixel;
 
         private Texture2D backgroundTexture, nebulaTexture, stars1Texture, stars2Texture;
@@ -30,8 +31,8 @@ namespace SpaceWar {
                 arenaBounds.Left + 3 * arenaBounds.Width / 4f,
                 arenaCenter.Y
             );
-            player1 = new Player(leftHalfCenter, Keys.Z, Keys.Q, Keys.D, Keys.Space, Keys.LeftShift, 0, arenaBounds);
-            player2 = new Player(rightHalfCenter, Keys.Up, Keys.Left, Keys.Right, Keys.RightControl, Keys.RightAlt, 1, arenaBounds);
+            player1 = new Player("Player 1", leftHalfCenter, Keys.Z, Keys.Q, Keys.D, Keys.Space, Keys.LeftShift, 0, arenaBounds);
+            player2 = new Player("Player 2", rightHalfCenter, Keys.Up, Keys.Left, Keys.Right, Keys.RightControl, Keys.RightAlt, 1, arenaBounds);
         }
 
         public override void LoadContent(ContentManager content) {
@@ -49,11 +50,14 @@ namespace SpaceWar {
         }
 
         public override void Update(GameTime gameTime) {
+            float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            gameDuration += elapsedTime;
+
             player1.Update(gameTime);
             player2.Update(gameTime);
 
             if (player1.Health <= 0 || player2.Health <= 0) {
-                game.ChangeScreen(new EndScreen(game, player1, player2));
+                game.ChangeScreen(new EndScreen(game, player1, player2, gameDuration));
             }
 
             for (int i = explosions.Count - 1; i >= 0; i--) {
@@ -105,8 +109,8 @@ namespace SpaceWar {
 
             Color bulletTextColor1 = player1.GetBulletCount() == 0 ? Color.Red : Color.White;
             Color bulletTextColor2 = player2.GetBulletCount() == 0 ? Color.Red : Color.White;
-            spriteBatch.DrawString(game.Font, $"Bullets: {player1.GetBulletCount()}", new Vector2(10, 45), bulletTextColor1);
-            spriteBatch.DrawString(game.Font, $"Bullets: {player2.GetBulletCount()}", new Vector2(1280 - 208, 45), bulletTextColor2);
+            spriteBatch.DrawString(game.TextFont, $"Munitions: {player1.GetBulletCount()}", new Vector2(10, 45), bulletTextColor1);
+            spriteBatch.DrawString(game.TextFont, $"Munition: {player2.GetBulletCount()}", new Vector2(1280 - 208, 45), bulletTextColor2);
 
             float boostRatio1 = MathHelper.Clamp(player1.GetBoost() / player1.GetMaxBoost(), 0, 1);
             Rectangle bgBoostBar1 = new Rectangle(10, healthBarHeight + 15, barWidth, boostBarHeight);
@@ -165,6 +169,7 @@ namespace SpaceWar {
                     AddExplosion(projectile.Position);
                     projectile.Active = false;
                     player2.Health -= 10;
+                    player1.TotalDamageDealt += 10;
                 }
             }
 
@@ -173,6 +178,7 @@ namespace SpaceWar {
                     AddExplosion(projectile.Position);
                     projectile.Active = false;
                     player1.Health -= 10;
+                    player2.TotalDamageDealt += 10;
                 }
             }
         }

@@ -10,7 +10,9 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private Screen currentScreen;
 
-    public SpriteFont Font { get; private set; }
+    public SpriteFont TextFont { get; private set; }
+    public SpriteFont TitleFont { get; private set; }
+    public SpriteFont MidFont { get; private set; }
 
     public Game1()
     {
@@ -31,7 +33,9 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        Font = Content.Load<SpriteFont>("DefaultFont");
+        TitleFont = Content.Load<SpriteFont>("TitleFont");
+        MidFont = Content.Load<SpriteFont>("MidFont");
+        TextFont = Content.Load<SpriteFont>("TextFont");
         currentScreen.LoadContent(Content);
 
         currentScreen.LoadContent(Content);
