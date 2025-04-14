@@ -17,7 +17,7 @@ namespace SpaceWar {
         private ContentManager contentManager;
         private Rectangle arenaBounds;
 
-        public GameScreen(Game1 game) : base(game) {
+        public GameScreen(Game1 game, string player1Username, string player2Username) : base(game) {
             arenaBounds = new Rectangle(-10, -10, 1290, 730);
             Vector2 arenaCenter = new Vector2(
                 arenaBounds.Left + arenaBounds.Width / 2f,
@@ -31,8 +31,8 @@ namespace SpaceWar {
                 arenaBounds.Left + 3 * arenaBounds.Width / 4f,
                 arenaCenter.Y
             );
-            player1 = new Player("Player 1", leftHalfCenter, Keys.Z, Keys.Q, Keys.D, Keys.Space, Keys.LeftShift, 0, arenaBounds);
-            player2 = new Player("Player 2", rightHalfCenter, Keys.Up, Keys.Left, Keys.Right, Keys.RightControl, Keys.RightAlt, 1, arenaBounds);
+            player1 = new Player(player1Username, leftHalfCenter, Keys.Z, Keys.Q, Keys.D, Keys.Space, Keys.LeftShift, 0, arenaBounds);
+            player2 = new Player(player2Username, rightHalfCenter, Keys.Up, Keys.Left, Keys.Right, Keys.RightControl, Keys.RightAlt, 1, arenaBounds);
         }
 
         public override void LoadContent(ContentManager content) {
@@ -75,20 +75,6 @@ namespace SpaceWar {
 
             player1.Draw(spriteBatch);
             player2.Draw(spriteBatch);
-            // HITBOX DEBUG
-            // DrawCircle(spriteBatch, player1.GetBounds(), Color.Blue);
-            // DrawCircle(spriteBatch, player2.GetBounds(), Color.Red);
-            // foreach (var projectile in player1.GetProjectiles()) {
-            //     if (projectile.Active) {
-            //         DrawCircle(spriteBatch, projectile.GetBounds(), Color.Green);
-            //     }
-            // }
-
-            // foreach (var projectile in player2.GetProjectiles()) {
-            //     if (projectile.Active) {
-            //         DrawCircle(spriteBatch, projectile.GetBounds(), Color.Yellow);
-            //     }
-            // }
 
             DrawUI(spriteBatch);
         }
@@ -105,41 +91,43 @@ namespace SpaceWar {
         }
 
         private void DrawUI(SpriteBatch spriteBatch) {
-            const int barWidth = 200, healthBarHeight = 20, boostBarHeight = 5, maxHealth = 100;
+            const int barWidth = 235, healthBarHeight = 20, boostBarHeight = 5, maxHealth = 100;
 
-            Color bulletTextColor1 = player1.GetBulletCount() == 0 ? Color.Red : Color.White;
-            Color bulletTextColor2 = player2.GetBulletCount() == 0 ? Color.Red : Color.White;
-            spriteBatch.DrawString(game.TextFont, $"Munitions: {player1.GetBulletCount()}", new Vector2(10, 45), bulletTextColor1);
-            spriteBatch.DrawString(game.TextFont, $"Munition: {player2.GetBulletCount()}", new Vector2(1280 - 208, 45), bulletTextColor2);
+            spriteBatch.DrawString(game.TextFont, player1.Username, new Vector2(10, 10), Color.White);
+            spriteBatch.DrawString(game.TextFont, player2.Username, new Vector2(1280 - barWidth - 10, 10), Color.White);
+
+            float healthRatio1 = MathHelper.Clamp(player1.Health / (float)maxHealth, 0, 1);
+            Rectangle bgBar1 = new Rectangle(10, 35, barWidth, healthBarHeight);
+            Rectangle fgBar1 = new Rectangle(10, 35, (int)(barWidth * healthRatio1), healthBarHeight);
+            spriteBatch.Draw(pixel, bgBar1, Color.DarkRed);
+            spriteBatch.Draw(pixel, fgBar1, Color.Red); 
+            Color barColor1 = player1.IsFlashing ? Color.White : Color.Red;
+            spriteBatch.Draw(pixel, fgBar1, barColor1);
+
+            float healthRatio2 = MathHelper.Clamp(player2.Health / (float)maxHealth, 0, 1);
+            Rectangle bgBar2 = new Rectangle(1280 - barWidth - 10, 35, barWidth, healthBarHeight);
+            Rectangle fgBar2 = new Rectangle(1280 - barWidth - 10, 35, (int)(barWidth * healthRatio2), healthBarHeight);
+            spriteBatch.Draw(pixel, bgBar2, Color.DarkRed);
+            spriteBatch.Draw(pixel, fgBar2, Color.Red);
+            Color barColor2 = player2.IsFlashing ? Color.White : Color.Red;
+            spriteBatch.Draw(pixel, fgBar2, barColor2);
 
             float boostRatio1 = MathHelper.Clamp(player1.GetBoost() / player1.GetMaxBoost(), 0, 1);
-            Rectangle bgBoostBar1 = new Rectangle(10, healthBarHeight + 15, barWidth, boostBarHeight);
-            Rectangle fgBoostBar1 = new Rectangle(10, healthBarHeight + 15, (int)(barWidth * boostRatio1), boostBarHeight);
+            Rectangle bgBoostBar1 = new Rectangle(10, healthBarHeight + 38, barWidth, boostBarHeight);
+            Rectangle fgBoostBar1 = new Rectangle(10, healthBarHeight + 38, (int)(barWidth * boostRatio1), boostBarHeight);
             spriteBatch.Draw(pixel, bgBoostBar1, Color.DarkOrange);
             spriteBatch.Draw(pixel, fgBoostBar1, Color.Yellow);
 
             float boostRatio2 = MathHelper.Clamp(player2.GetBoost() / player2.GetMaxBoost(), 0, 1);
-            Rectangle bgBoostBar2 = new Rectangle(1280 - barWidth - 10, healthBarHeight + 15, barWidth, boostBarHeight);
-            Rectangle fgBoostBar2 = new Rectangle(1280 - barWidth - 10, healthBarHeight + 15, (int)(barWidth * boostRatio2), boostBarHeight);
+            Rectangle bgBoostBar2 = new Rectangle(1280 - barWidth - 10, healthBarHeight + 38, barWidth, boostBarHeight);
+            Rectangle fgBoostBar2 = new Rectangle(1280 - barWidth - 10, healthBarHeight + 38, (int)(barWidth * boostRatio2), boostBarHeight);
             spriteBatch.Draw(pixel, bgBoostBar2, Color.DarkOrange);
             spriteBatch.Draw(pixel, fgBoostBar2, Color.Yellow);
 
-            float healthRatio1 = MathHelper.Clamp(player1.Health / (float)maxHealth, 0, 1);
-            Rectangle bgBar1 = new Rectangle(10, 10, barWidth, healthBarHeight);
-            Rectangle fgBar1 = new Rectangle(10, 10, (int)(barWidth * healthRatio1), healthBarHeight);
-            spriteBatch.Draw(pixel, bgBar1, Color.DarkRed);
-            spriteBatch.Draw(pixel, fgBar1, Color.Red); 
-
-            float healthRatio2 = MathHelper.Clamp(player2.Health / (float)maxHealth, 0, 1);
-            Rectangle bgBar2 = new Rectangle(1280 - barWidth - 10, 10, barWidth, healthBarHeight);
-            Rectangle fgBar2 = new Rectangle(1280 - barWidth - 10, 10, (int)(barWidth * healthRatio2), healthBarHeight);
-            spriteBatch.Draw(pixel, bgBar2, Color.DarkRed);
-            spriteBatch.Draw(pixel, fgBar2, Color.Red);
-
-            Color barColor1 = player1.IsFlashing ? Color.White : Color.Red;
-            Color barColor2 = player2.IsFlashing ? Color.White : Color.Red;
-            spriteBatch.Draw(pixel, fgBar1, barColor1);
-            spriteBatch.Draw(pixel, fgBar2, barColor2);
+            Color bulletTextColor1 = player1.GetBulletCount() == 0 ? Color.Red : Color.White;
+            Color bulletTextColor2 = player2.GetBulletCount() == 0 ? Color.Red : Color.White;
+            spriteBatch.DrawString(game.TextFont, $"Munitions: {player1.GetBulletCount()}", new Vector2(10, 65), bulletTextColor1);
+            spriteBatch.DrawString(game.TextFont, $"Munitions: {player2.GetBulletCount()}", new Vector2(1280 - barWidth - 10, 65), bulletTextColor2);
 
             spriteBatch.Draw(player1.GetTexture(), new Vector2(barWidth + 50, 40), null, Color.White, player1.Rotation,
                 new Vector2(player1.GetTexture().Width / 2, player1.GetTexture().Height / 2), 1f, SpriteEffects.None, 0f);
@@ -191,15 +179,6 @@ namespace SpaceWar {
 
         public static bool CirclesIntersect(Circle circle1, Circle circle2) =>
             Vector2.Distance(circle1.Center, circle2.Center) < (circle1.Radius + circle2.Radius);
-
-        public void DrawCircle(SpriteBatch spriteBatch, Circle circle, Color color) {
-            Texture2D circleTexture = contentManager.Load<Texture2D>("circle_texture");
-
-            float scale = circle.Radius / (circleTexture.Width / 2f);
-
-            spriteBatch.Draw(circleTexture, circle.Center, null, color, 0f,
-                new Vector2(circleTexture.Width / 2, circleTexture.Height / 2), scale, SpriteEffects.None, 0f);
-        }
 
     }
     

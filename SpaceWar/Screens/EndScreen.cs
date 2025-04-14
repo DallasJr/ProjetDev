@@ -62,7 +62,7 @@ namespace SpaceWar {
                 if (IsKeyPressed(currentKeyboard, Keys.Space) || IsKeyPressed(currentKeyboard, Keys.RightAlt)) {
                     switch (selectedIndex) {
                         case 0:
-                            game.ChangeScreen(new GameScreen(game));
+                            game.ChangeScreen(new GameScreen(game, player1.Username, player2.Username));
                             break;
                         case 1:
                             game.ChangeScreen(new MenuScreen(game));
