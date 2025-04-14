@@ -22,6 +22,11 @@ namespace SpaceWar {
         private float gameDuration;
         private Vector2 starsOffset = Vector2.Zero;
 
+        private float blinkTimer = 0f;
+        private bool showArrow = true;
+        private int selectedIndex = -1;
+        private string[] options = { "Rejouer", "Retour au menu" };
+
         public EndScreen(Game1 game, Player p1, Player p2, float gameDuration) : base(game) {
             player1 = p1;
             player2 = p2;
@@ -38,10 +43,41 @@ namespace SpaceWar {
 
         }
 
+        private KeyboardState previousKeyboard;
+
         public override void Update(GameTime gameTime) {
             winner.Update(gameTime);
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                game.ChangeScreen(new MenuScreen(game));
+            KeyboardState currentKeyboard  = Keyboard.GetState();
+            if (selectedIndex == -1) {
+                if (currentKeyboard.IsKeyDown(Keys.Down) || currentKeyboard.IsKeyDown(Keys.S) || currentKeyboard.IsKeyDown(Keys.Z) || currentKeyboard.IsKeyDown(Keys.Up)) {
+                    selectedIndex = 0;
+                }
+            } else {
+                if (IsKeyPressed(currentKeyboard, Keys.Down) || IsKeyPressed(currentKeyboard, Keys.S)) {
+                    selectedIndex = (selectedIndex + 1) % options.Length;
+                }
+                if (IsKeyPressed(currentKeyboard, Keys.Up) || IsKeyPressed(currentKeyboard, Keys.Z)) {
+                    selectedIndex = (selectedIndex - 1 + options.Length) % options.Length;
+                }
+                if (IsKeyPressed(currentKeyboard, Keys.Space) || IsKeyPressed(currentKeyboard, Keys.RightAlt)) {
+                    switch (selectedIndex) {
+                        case 0:
+                            game.ChangeScreen(new GameScreen(game));
+                            break;
+                        case 1:
+                            game.ChangeScreen(new MenuScreen(game));
+                            break;
+                    }
+                }
+            }
+
+            blinkTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (blinkTimer >= 0.5f) {
+                showArrow = !showArrow;
+                blinkTimer = 0f;
+            }
+
+            previousKeyboard = currentKeyboard;
 
             starsOffset -= winner.Velocity * 1f;
             starsOffset.X %= stars1Texture.Width;
@@ -49,6 +85,10 @@ namespace SpaceWar {
             
             trophyTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+        }
+        
+        private bool IsKeyPressed(KeyboardState current, Keys key) {
+            return current.IsKeyDown(key) && previousKeyboard.IsKeyUp(key);
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
@@ -67,7 +107,7 @@ namespace SpaceWar {
             Vector2 scorePos = new Vector2(100, 250);
             Vector2 winnerScorePos = new Vector2(100, 320);
             Vector2 loserScorePos = new Vector2(100, 370);
-            Vector2 hintPos = new Vector2(100, 600);
+            Vector2 menuPos = new Vector2(100, 600);
 
             float pulse = (float)Math.Sin(trophyTimer * 5f) * 0.35f + 0.65f;
             Color trophyColor = Color.White * pulse;
@@ -80,15 +120,19 @@ namespace SpaceWar {
             string winnerString = $"{winner.Username} : {CalculateScore(winner)} pts";
             spriteBatch.DrawString(game.MidFont, winnerString, winnerScorePos, Color.Orange);
             Vector2 winTextSize = game.MidFont.MeasureString(winnerString);
-            Vector2 trophyPos = winnerScorePos + new Vector2(winTextSize.X + 20, 0);
+            Vector2 trophyPos = winnerScorePos + new Vector2(winTextSize.X + 20, -5);
             spriteBatch.Draw(trophyTexture, trophyPos, null, trophyColor, 0f, Vector2.Zero, 0.035f, SpriteEffects.None, 0f);
             spriteBatch.DrawString(game.TextFont, $"{loser.Username} : {CalculateScore(loser)} pts", loserScorePos, Color.Gray);
-
-            spriteBatch.DrawString(game.TextFont, "[ENTREE] : Retour au menu", hintPos, Color.LightGray);
 
             Texture2D winTexture = winner.GetTexture();
             spriteBatch.Draw(winTexture, new Vector2(900, 350), null, Color.White, winner.Rotation,
                 new Vector2(winTexture.Width / 2, winTexture.Height / 2), 4f, SpriteEffects.None, 0f);
+
+            for (int i = 0; i < options.Length; i++) {
+                Color color = (i == selectedIndex) ? Color.Yellow : Color.LightGray;
+                string prefix = (i == selectedIndex && showArrow) ? "> " : "  ";
+                spriteBatch.DrawString(game.TextFont, prefix + options[i], menuPos + new Vector2(0, i * 30), color);
+            }
         }
 
         private int CalculateScore(Player player)
