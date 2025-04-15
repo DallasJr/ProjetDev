@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -107,7 +108,7 @@ namespace SpaceWar {
             Vector2 winTextPos = new Vector2(200, 160);
             Vector2 scorePos = new Vector2(100, 250);
             Vector2 winnerScorePos = new Vector2(100, 320);
-            Vector2 loserScorePos = new Vector2(100, 370);
+            Vector2 loserScorePos = new Vector2(100, 400);
             Vector2 menuPos = new Vector2(100, 600);
 
             float pulse = (float)Math.Sin(trophyTimer * 5f) * 0.35f + 0.65f;
@@ -131,6 +132,18 @@ namespace SpaceWar {
                 ScoreManager.AddScore(loser.Username, loserScore);
                 scoreSaved = true;
             }
+            int? winnerRank = GetLeaderboardRank(winner.Username, winnerScore);
+            if (winnerRank.HasValue) {
+                Vector2 winnerRankPos = winnerScorePos + new Vector2(0, 30);
+                Color rankColor = GetRankColor(winnerRank.Value);
+                spriteBatch.DrawString(game.TextFont, $"#{winnerRank.Value} du leaderboard !", winnerRankPos, rankColor);
+            }
+            int? loserRank = GetLeaderboardRank(loser.Username, loserScore);
+            if (loserRank.HasValue) {
+                Vector2 loserRankPos = loserScorePos + new Vector2(0, 30);
+                Color rankColor = GetRankColor(loserRank.Value);
+                spriteBatch.DrawString(game.TextFont, $"#{loserRank.Value} du leaderboard !", loserRankPos, rankColor);
+            }
             Texture2D winTexture = winner.GetTexture();
             spriteBatch.Draw(winTexture, new Vector2(900, 350), null, Color.White, winner.Rotation,
                 new Vector2(winTexture.Width / 2, winTexture.Height / 2), 4f, SpriteEffects.None, 0f);
@@ -142,7 +155,14 @@ namespace SpaceWar {
             }
         }
 
-        private int CalculateScore(Player player) {
+        private Color GetRankColor(int rank) {
+            if (rank == 1) return Color.Gold;
+            if (rank == 2) return new Color(192, 192, 192);
+            if (rank == 3) return new Color(205, 127, 50);
+            return Color.LightGray;
+        }
+
+        private int CalculateScore(Player player) { // Calcule de score compétitive avec soft cap
             float precision = (player.TotalBulletsFired > 0) ? player.TotalDamageDealt / (float)player.TotalBulletsFired : 0f;
             float precisionScore = 300f * MathHelper.Clamp(precision, 0f, 1f);
 
@@ -166,6 +186,19 @@ namespace SpaceWar {
             ) * timeFactor;
 
             return (int)finalScore;
+        }
+
+        private int? GetLeaderboardRank(string name, int score){
+            var scores = ScoreManager.LoadScores()
+                .OrderByDescending(s => s.Score)
+                .ToList();
+
+            for (int i = 0; i < scores.Count && i < 10; i++) {
+                if (scores[i].Name == name && scores[i].Score == score) {
+                    return i + 1;
+                }
+            }
+            return null;
         }
     }
 }
