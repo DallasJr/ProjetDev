@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/background.png</SourceFile>
-  <SourceTime>2023-03-28T15:43:15.2888692+02:00</SourceTime>
-  <DestFile>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/bin/DesktopGL/background.xnb</DestFile>
-  <DestTime>2025-04-15T15:13:34.862517+02:00</DestTime>
+  <SourceFile>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/check-mark.png</SourceFile>
+  <SourceTime>2025-04-15T15:41:35.3575497+02:00</SourceTime>
+  <DestFile>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/bin/DesktopGL/Content/check-mark.xnb</DestFile>
+  <DestTime>2025-04-15T15:42:04.76789+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-16T19:05:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

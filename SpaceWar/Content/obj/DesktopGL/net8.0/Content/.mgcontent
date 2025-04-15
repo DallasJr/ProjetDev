@@ -5,6 +5,7 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/background.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/check-mark.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-1.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-2.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-3.png</File>
@@ -36,6 +37,7 @@
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/trophy.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -55,3 +55,4 @@ C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\explo
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\explosion-6.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\explosion-7.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\explosion-8.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\check-mark.xnb
