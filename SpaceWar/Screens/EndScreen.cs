@@ -26,6 +26,7 @@ namespace SpaceWar {
         private bool showArrow = true;
         private int selectedIndex = -1;
         private string[] options = { "Rejouer", "Retour au menu" };
+        private bool scoreSaved = false;
 
         public EndScreen(Game1 game, Player p1, Player p2, float gameDuration) : base(game) {
             player1 = p1;
@@ -103,7 +104,7 @@ namespace SpaceWar {
                     spriteBatch.Draw(stars2Texture, new Vector2(x, y) + starsOffset * 1.5f, Color.White);
 
             Vector2 titlePos = new Vector2(100, 50);
-            Vector2 winTextPos = new Vector2(100, 150);
+            Vector2 winTextPos = new Vector2(200, 160);
             Vector2 scorePos = new Vector2(100, 250);
             Vector2 winnerScorePos = new Vector2(100, 320);
             Vector2 loserScorePos = new Vector2(100, 370);
@@ -117,13 +118,19 @@ namespace SpaceWar {
 
             spriteBatch.DrawString(game.MidFont, "SCORES :", scorePos, Color.White);
 
-            string winnerString = $"{winner.Username} : {CalculateScore(winner)} pts";
+            int winnerScore = CalculateScore(winner);
+            int loserScore = CalculateScore(loser);
+            string winnerString = $"{winner.Username} : {winnerScore} pts";
             spriteBatch.DrawString(game.MidFont, winnerString, winnerScorePos, Color.Orange);
             Vector2 winTextSize = game.MidFont.MeasureString(winnerString);
             Vector2 trophyPos = winnerScorePos + new Vector2(winTextSize.X + 20, -5);
             spriteBatch.Draw(trophyTexture, trophyPos, null, trophyColor, 0f, Vector2.Zero, 0.035f, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(game.TextFont, $"{loser.Username} : {CalculateScore(loser)} pts", loserScorePos, Color.Gray);
-
+            spriteBatch.DrawString(game.TextFont, $"{loser.Username} : {loserScore} pts", loserScorePos, Color.Gray);
+            if (!scoreSaved) {
+                ScoreManager.AddScore(winner.Username, winnerScore);
+                ScoreManager.AddScore(loser.Username, loserScore);
+                scoreSaved = true;
+            }
             Texture2D winTexture = winner.GetTexture();
             spriteBatch.Draw(winTexture, new Vector2(900, 350), null, Color.White, winner.Rotation,
                 new Vector2(winTexture.Width / 2, winTexture.Height / 2), 4f, SpriteEffects.None, 0f);
@@ -135,16 +142,29 @@ namespace SpaceWar {
             }
         }
 
-        private int CalculateScore(Player player)
-        {
-            float baseScore = player.Winner ? 1000f : 500f;
-            float healthBonus = player.Health * 5f;
-            float aggressionBonus = Math.Min(player.TotalDamageDealt, 100f);
-            float bulletEfficiency = (float)player.TotalDamageDealt / Math.Max(1, player.TotalBulletsFired);
-            float timeFactor = MathHelper.Clamp(gameDuration / 60f, 0.5f, 1.5f);
-            float movementRatio = MathHelper.Clamp(player.TimeInMotion / gameDuration, 0.2f, 1f);
-            float farmingPenalty = 0.5f + (movementRatio * 0.5f);
-            float finalScore = (baseScore + healthBonus + aggressionBonus + bulletEfficiency * 100f) * timeFactor * farmingPenalty;
+        private int CalculateScore(Player player) {
+            float precision = (player.TotalBulletsFired > 0) ? player.TotalDamageDealt / (float)player.TotalBulletsFired : 0f;
+            float precisionScore = 300f * MathHelper.Clamp(precision, 0f, 1f);
+
+            float aggressionScore = 150f * (1f - (float)Math.Exp(-player.TotalDamageDealt / 50f));
+            float dodgeScore = 20f * (float)Math.Sqrt(player.Dodges);
+            float healthScore = (float)Math.Pow(player.Health, 0.8f);
+            float mobilityRatio = MathHelper.Clamp(player.TimeInMotion / gameDuration, 0.1f, 1f);
+            float mobilityScore = 120f * mobilityRatio;
+
+            float winBonus = player.Winner ? 200f : 0f;
+
+            float timeFactor = MathHelper.Clamp(gameDuration / 60f, 0.75f, 1.25f);
+
+            float finalScore = (
+                precisionScore +
+                aggressionScore +
+                dodgeScore +
+                healthScore +
+                mobilityScore +
+                winBonus
+            ) * timeFactor;
+
             return (int)finalScore;
         }
     }

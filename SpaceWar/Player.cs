@@ -74,6 +74,10 @@ namespace SpaceWar {
         public int TotalDamageDealt { get; set; } = 0;
         public float TimeInMotion { get; private set; } = 0f;
 
+        private DodgeTracker dodgeTracker;
+        public int Dodges => dodgeTracker?.Dodges ?? 0;
+        private List<Projectile> lastEnemyProjectiles = new();
+
         public bool Winner { get; set; } = false;
 
         public Player(string username, Vector2 startPosition, Keys up, Keys left, Keys right, Keys fire, Keys boost, int index, Rectangle arenaBounds) {
@@ -88,6 +92,7 @@ namespace SpaceWar {
             playerIndex = index;
             this.arenaBounds = arenaBounds;
             if (playerIndex == 0) Rotation = MathHelper.Pi;
+            dodgeTracker = new DodgeTracker(this);
         }
 
         public Circle GetBounds() {
@@ -185,6 +190,10 @@ namespace SpaceWar {
             if (hitFlashTimer > 0) hitFlashTimer -= elapsedTime;
         }
 
+        public void UpdateDodging(List<Projectile> enemyProjectiles, float elapsedTime) {
+            lastEnemyProjectiles = enemyProjectiles;
+            dodgeTracker.Update(enemyProjectiles, elapsedTime, Velocity);
+        }
 
         public void Draw(SpriteBatch spriteBatch) {
             foreach (var projectile in projectiles) {

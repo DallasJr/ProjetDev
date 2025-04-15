@@ -16,6 +16,14 @@ namespace SpaceWar {
         private List<Explosion> explosions = new();
         private ContentManager contentManager;
         private Rectangle arenaBounds;
+        
+        private int countdown = 3;
+        private float countdownTimer = 0f;
+        private bool countdownStarted = false;
+        private bool gameStarted = false;
+        private bool showGo = false;
+        private float goDisplayTime = 0f;
+        private const float goDuration = 1f;
 
         public GameScreen(Game1 game, string player1Username, string player2Username) : base(game) {
             arenaBounds = new Rectangle(-10, -10, 1290, 730);
@@ -50,33 +58,62 @@ namespace SpaceWar {
         }
 
         public override void Update(GameTime gameTime) {
-            float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            gameDuration += elapsedTime;
+            if (!gameStarted) {
+                if (!countdownStarted) {
+                    countdownStarted = true;
+                    countdownTimer = 0f;
+                }
+                countdownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (countdown > 0 && countdownTimer >= 1f) {
+                    countdown--;
+                    countdownTimer = 0f;
 
-            player1.Update(gameTime);
-            player2.Update(gameTime);
+                    if (countdown == 0) {
+                        gameStarted = true;
+                        showGo = true;
+                        goDisplayTime = 0f;
+                    }
+                }
+            } else {
+                if (showGo) {
+                    goDisplayTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if (goDisplayTime >= goDuration) {
+                        showGo = false;
+                    }
+                }
+                gameDuration += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                player1.Update(gameTime);
+                player2.Update(gameTime);
+                float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                player1.UpdateDodging(player2.GetProjectiles(), elapsed);
+                player2.UpdateDodging(player1.GetProjectiles(), elapsed);
 
-            if (player1.Health <= 0 || player2.Health <= 0) {
-                game.ChangeScreen(new EndScreen(game, player1, player2, gameDuration));
+                if (player1.Health <= 0 || player2.Health <= 0) {
+                    game.ChangeScreen(new EndScreen(game, player1, player2, gameDuration));
+                }
+                for (int i = explosions.Count - 1; i >= 0; i--) {
+                    explosions[i].Update(gameTime);
+                    if (explosions[i].IsExpired()) explosions.RemoveAt(i);
+                }
+                CheckProjectileCollisions();
             }
-
-            for (int i = explosions.Count - 1; i >= 0; i--) {
-                explosions[i].Update(gameTime);
-                if (explosions[i].IsExpired()) explosions.RemoveAt(i);
-            }
-            
-            CheckProjectileCollisions();
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
             DrawBackground(spriteBatch);
-
             foreach (var explosion in explosions) explosion.Draw(spriteBatch);
-
             player1.Draw(spriteBatch);
             player2.Draw(spriteBatch);
-
-            DrawUI(spriteBatch);
+            if (!gameStarted || showGo) {
+                string countdownText = countdown > 0 ? $"{countdown}" : "GO";
+                Vector2 textSize = game.MidFont.MeasureString(countdownText);
+                Vector2 textPosition = new Vector2(640, 300);
+                spriteBatch.DrawString(game.MidFont, countdownText, textPosition, Color.Teal, 0f,
+                    textSize / 2f, 1f, SpriteEffects.None, 0f);
+            }
+            if (gameStarted) {
+                DrawUI(spriteBatch);
+            }
         }
 
         private void DrawBackground(SpriteBatch spriteBatch) {

@@ -56,3 +56,13 @@ C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\explo
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\explosion-7.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\explosion-8.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\check-mark.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\blue_01.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\darkgrey_02.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\enemy_1_3.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\enemy_2_3.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\green_06.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\large_enemy.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\metalic_02.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\orange_03.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\purple_03.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\red_01.xnb
