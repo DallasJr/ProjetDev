@@ -6,6 +6,7 @@ using System;
 namespace SpaceWar {
     public class Projectile {
         public Vector2 Position;
+        public Vector2 StartPosition;
         public Vector2 Velocity;
         public bool Active = true;
         public float Speed;
@@ -18,6 +19,7 @@ namespace SpaceWar {
 
         public Projectile(Vector2 position, float angle, int index, float speed) {
             Position = position;
+            StartPosition = position;
             rotation = angle;
             Speed = speed;
             playerIndex = index;

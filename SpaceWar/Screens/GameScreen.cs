@@ -193,6 +193,8 @@ namespace SpaceWar {
                 if (projectile.Active && projectile.OwnerIndex != 1 && CirclesIntersect(projectile.GetBounds(), player2.GetBounds())) {
                     AddExplosion(projectile.Position);
                     projectile.Active = false;
+                    float distance = Vector2.Distance(projectile.StartPosition, projectile.Position);
+                    player1.TotalHitDistance += distance;
                     player2.Health -= 10;
                     player1.TotalDamageDealt += 10;
                 }
@@ -202,6 +204,8 @@ namespace SpaceWar {
                 if (projectile.Active && projectile.OwnerIndex != 0 && CirclesIntersect(projectile.GetBounds(), player1.GetBounds())) {
                     AddExplosion(projectile.Position);
                     projectile.Active = false;
+                    float distance = Vector2.Distance(projectile.StartPosition, projectile.Position);
+                    player2.TotalHitDistance += distance;
                     player1.Health -= 10;
                     player2.TotalDamageDealt += 10;
                 }

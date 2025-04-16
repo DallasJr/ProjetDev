@@ -171,6 +171,9 @@ namespace SpaceWar {
             float healthScore = (float)Math.Pow(player.Health, 0.8f);
             float mobilityRatio = MathHelper.Clamp(player.TimeInMotion / gameDuration, 0.1f, 1f);
             float mobilityScore = 120f * mobilityRatio;
+            
+            float averageHitDistance = (player.TotalDamageDealt > 0) ? player.TotalHitDistance / player.TotalDamageDealt : 0f;
+            float rangeScore = 80f * MathHelper.Clamp(averageHitDistance / 300f, 0f, 1f);
 
             float winBonus = player.Winner ? 200f : 0f;
 
@@ -181,6 +184,7 @@ namespace SpaceWar {
                 aggressionScore +
                 dodgeScore +
                 healthScore +
+                rangeScore +
                 mobilityScore +
                 winBonus
             ) * timeFactor;

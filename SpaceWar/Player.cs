@@ -73,6 +73,7 @@ namespace SpaceWar {
         public int TotalBulletsFired { get; private set; } = 0;
         public int TotalDamageDealt { get; set; } = 0;
         public float TimeInMotion { get; private set; } = 0f;
+        public float TotalHitDistance { get; set; } = 0f;
 
         private DodgeTracker dodgeTracker;
         public int Dodges => dodgeTracker?.Dodges ?? 0;
