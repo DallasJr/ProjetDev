@@ -49,6 +49,12 @@
 /processorParam:TextureFormat=Color
 /build:check-mark.png
 
+#begin countdown.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:countdown.wav
+
 #begin darkgrey_02.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -84,6 +90,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:enemy_2_3.png
+
+#begin explode-1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:explode-1.wav
+
+#begin explode-2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:explode-2.wav
 
 #begin explosion-1.png
 /importer:TextureImporter
@@ -204,6 +222,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:large_enemy.png
+
+#begin laser.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:laser.wav
 
 #begin main_idle.png
 /importer:TextureImporter

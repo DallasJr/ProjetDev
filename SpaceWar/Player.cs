@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -31,6 +32,7 @@ namespace SpaceWar {
         private float healthRegenTimer = 0f;
 
         private Texture2D idle, moving, left, right, slow_left, slow_right;
+        private SoundEffect shootSound;
         private Texture2D texture;
         private Keys forwardKey, leftKey, rightKey, fireKey, boostKey;
 
@@ -110,6 +112,7 @@ namespace SpaceWar {
             slow_left = content.Load<Texture2D>(prefix + "slow_left");
             slow_right = content.Load<Texture2D>(prefix + "slow_right");
             texture = idle;
+            shootSound = content.Load<SoundEffect>("laser");
         }
 
         public void Update(GameTime gameTime) {
@@ -216,6 +219,7 @@ namespace SpaceWar {
             Projectile projectile = new Projectile(projectilePosition, Rotation, playerIndex, 10f);
             projectile.LoadContent(contentManager);
             projectiles.Add(projectile);
+            shootSound.Play(volume: 0.2f, pitch: 0f, pan: 0f);
         }
         
     }

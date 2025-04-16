@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/countdown.wav</SourceFile>
+  <SourceTime>2025-04-16T12:33:47.7920935+02:00</SourceTime>
+  <DestFile>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/bin/DesktopGL/countdown.xnb</DestFile>
+  <DestTime>2025-04-16T13:03:07.2917567+02:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2024-08-16T19:05:56+02:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2024-08-16T19:05:56+02:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

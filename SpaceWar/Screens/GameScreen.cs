@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,6 +13,7 @@ namespace SpaceWar {
         private Texture2D pixel;
 
         private Texture2D backgroundTexture, nebulaTexture, stars1Texture, stars2Texture;
+        private SoundEffect countdownSound, explode1, explode2;
 
         private List<Explosion> explosions = new();
         private ContentManager contentManager;
@@ -52,6 +54,10 @@ namespace SpaceWar {
             nebulaTexture = content.Load<Texture2D>("nebula_2");
             stars1Texture = content.Load<Texture2D>("stars_1");
             stars2Texture = content.Load<Texture2D>("stars_2");
+            
+            countdownSound = content.Load<SoundEffect>("countdown");
+            explode1 = content.Load<SoundEffect>("explode-1");
+            explode2 = content.Load<SoundEffect>("explode-2");
 
             pixel = new Texture2D(game.GraphicsDevice, 1, 1);
             pixel.SetData(new[] { Color.White });
@@ -60,6 +66,7 @@ namespace SpaceWar {
         public override void Update(GameTime gameTime) {
             if (!gameStarted) {
                 if (!countdownStarted) {
+                    countdownSound.Play(volume: 0.2f, pitch: 0f, pan: 0f);
                     countdownStarted = true;
                     countdownTimer = 0f;
                 }
@@ -89,6 +96,7 @@ namespace SpaceWar {
                 player2.UpdateDodging(player1.GetProjectiles(), elapsed);
 
                 if (player1.Health <= 0 || player2.Health <= 0) {
+                    explode1.Play(volume: 0.2f, pitch: 0f, pan: 0f);
                     game.ChangeScreen(new EndScreen(game, player1, player2, gameDuration));
                 }
                 for (int i = explosions.Count - 1; i >= 0; i--) {
@@ -216,6 +224,7 @@ namespace SpaceWar {
             var explosion = new Explosion(position);
             explosion.LoadContent(contentManager);
             explosions.Add(explosion);
+            explode2.Play(volume: 0.2f, pitch: 0f, pan: 0f);
         }
 
         public static bool CirclesIntersect(Circle circle1, Circle circle2) =>

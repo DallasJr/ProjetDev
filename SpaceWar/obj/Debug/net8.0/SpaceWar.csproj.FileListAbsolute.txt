@@ -66,3 +66,7 @@ C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\metal
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\orange_03.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\purple_03.xnb
 C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\red_01.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\countdown.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\explode-1.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\explode-2.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\laser.xnb

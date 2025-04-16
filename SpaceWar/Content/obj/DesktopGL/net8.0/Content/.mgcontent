@@ -7,9 +7,12 @@
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/background.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/blue_01.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/check-mark.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/countdown.wav</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/darkgrey_02.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/enemy_1_3.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/enemy_2_3.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explode-1.wav</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explode-2.wav</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-1.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-2.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-3.png</File>
@@ -20,6 +23,7 @@
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-8.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/green_06.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/large_enemy.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/laser.wav</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_idle.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_left.png</File>
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_moving.png</File>
@@ -47,6 +51,10 @@
     <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/trophy.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
