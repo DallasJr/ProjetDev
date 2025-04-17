@@ -145,3 +145,8 @@ C:\Users\Jr\Documents\ProjetDev\SpaceWar\obj\Debug\net8.0\ref\SpaceWar.dll
 C:\Users\Jr\Documents\ProjetDev\SpaceWar\bin\Debug\net8.0\Content\left-arrow.xnb
 C:\Users\Jr\Documents\ProjetDev\SpaceWar\bin\Debug\net8.0\Content\right_arrow.xnb
 C:\Users\Jr\Documents\ProjetDev\SpaceWar\bin\Debug\net8.0\Content\left_arrow.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\left-arrow.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\left_arrow.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\right_arrow.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\instruction1.xnb
+C:\Users\dalla\Desktop\Cours YNOV\ProDev\SpaceWar\bin\Debug\net8.0\Content\instruction2.xnb

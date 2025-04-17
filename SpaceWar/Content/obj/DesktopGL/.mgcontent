@@ -4,55 +4,59 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/background.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/blue_01.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/check-mark.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/countdown.wav</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/darkgrey_02.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/enemy_1_3.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/enemy_2_3.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/explode-1.wav</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/explode-2.wav</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/explosion-1.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/explosion-2.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/explosion-3.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/explosion-4.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/explosion-5.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/explosion-6.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/explosion-7.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/explosion-8.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/green_06.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/large_enemy.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/laser.wav</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/left_arrow.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/main_idle.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/main_left.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/main_moving.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/main_right.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/main_slow_left.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/main_slow_right.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/metalic_02.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/MidFont.spritefont</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/nebula_2.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/orange_03.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/projectile_1.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/projectile_2.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/purple_03.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/red_01.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/right_arrow.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/sec_idle.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/sec_left.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/sec_moving.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/sec_right.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/sec_slow_left.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/sec_slow_right.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/stars_1.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/stars_2.png</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/TextFont.spritefont</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/TitleFont.spritefont</File>
-    <File>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/trophy.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/background.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/blue_01.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/check-mark.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/countdown.wav</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/darkgrey_02.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/enemy_1_3.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/enemy_2_3.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explode-1.wav</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explode-2.wav</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-1.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-2.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-3.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-4.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-5.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-6.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-7.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/explosion-8.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/green_06.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/instruction1.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/instruction2.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/large_enemy.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/laser.wav</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/left_arrow.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_idle.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_left.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_moving.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_right.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_slow_left.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/main_slow_right.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/metalic_02.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/MidFont.spritefont</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/nebula_2.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/orange_03.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/projectile_1.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/projectile_2.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/purple_03.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/red_01.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/right_arrow.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_idle.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_left.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_moving.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_right.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_slow_left.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/sec_slow_right.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/stars_1.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/stars_2.png</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/TextFont.spritefont</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/TitleFont.spritefont</File>
+    <File>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/trophy.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

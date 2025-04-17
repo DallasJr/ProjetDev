@@ -12,8 +12,9 @@ namespace SpaceWar {
 
         private List<Texture2D> instructionSlides;
 
+        private bool justOpened = true;
         private int currentSlide = 0;
-        private int selectedIndex = 0;
+        private int selectedIndex = 1;
         private string returnText = "Retour menu";
 
         private KeyboardState previousKeyboard;
@@ -31,8 +32,8 @@ namespace SpaceWar {
             stars2Texture = content.Load<Texture2D>("stars_2");
 
             instructionSlides = new List<Texture2D> {
-                content.Load<Texture2D>("red_01"),
-                content.Load<Texture2D>("orange_03"),
+                content.Load<Texture2D>("instruction1"),
+                content.Load<Texture2D>("instruction2"),
                 content.Load<Texture2D>("purple_03")
             };
 
@@ -43,6 +44,13 @@ namespace SpaceWar {
         public override void Update(GameTime gameTime) {
             { // Navigation
             KeyboardState current = Keyboard.GetState();
+            if (justOpened) {
+                if (current.GetPressedKeys().Length == 0) {
+                    justOpened = false;
+                }
+                previousKeyboard = current;
+                return;
+            }
             int max = instructionSlides.Count;
             if (IsKeyPressed(current, Keys.Down) || IsKeyPressed(current, Keys.S)) {
                 if (selectedIndex == 0 || selectedIndex == 1) {
