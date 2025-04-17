@@ -94,14 +94,12 @@ namespace SpaceWar {
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White);
-            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White);
-            for (int x = -stars1Texture.Width; x < 1280 + stars1Texture.Width; x += stars1Texture.Width)
-                for (int y = -stars1Texture.Height; y < 720 + stars1Texture.Height; y += stars1Texture.Height)
+            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, game.ScreenResolution.X, game.ScreenResolution.Y), Color.White);
+            for (int x = -stars1Texture.Width; x < game.ScreenResolution.X + stars1Texture.Width; x += stars1Texture.Width)
+                for (int y = -stars1Texture.Height; y < game.ScreenResolution.Y + stars1Texture.Height; y += stars1Texture.Height)
                     spriteBatch.Draw(stars1Texture, new Vector2(x, y) + starsOffset, Color.White);
-
-            for (int x = -stars2Texture.Width; x < 1280 + stars2Texture.Width; x += stars2Texture.Width)
-                for (int y = -stars2Texture.Height; y < 720 + stars2Texture.Height; y += stars2Texture.Height)
+            for (int x = -stars2Texture.Width; x < game.ScreenResolution.X + stars2Texture.Width; x += stars2Texture.Width)
+                for (int y = -stars2Texture.Height; y < game.ScreenResolution.Y + stars2Texture.Height; y += stars2Texture.Height)
                     spriteBatch.Draw(stars2Texture, new Vector2(x, y) + starsOffset * 1.5f, Color.White);
 
             Vector2 titlePos = new Vector2(100, 50);
@@ -109,7 +107,7 @@ namespace SpaceWar {
             Vector2 scorePos = new Vector2(100, 250);
             Vector2 winnerScorePos = new Vector2(100, 320);
             Vector2 loserScorePos = new Vector2(100, 400);
-            Vector2 menuPos = new Vector2(100, 600);
+            Vector2 menuPos = new Vector2(100, game.ScreenResolution.Y - 120);
 
             float pulse = (float)Math.Sin(trophyTimer * 5f) * 0.35f + 0.65f;
             Color trophyColor = Color.White * pulse;
@@ -128,24 +126,28 @@ namespace SpaceWar {
             spriteBatch.Draw(trophyTexture, trophyPos, null, trophyColor, 0f, Vector2.Zero, 0.035f, SpriteEffects.None, 0f);
             spriteBatch.DrawString(game.TextFont, $"{loser.Username} : {loserScore} pts", loserScorePos, Color.Gray);
             if (!scoreSaved) {
-                ScoreManager.AddScore(winner.Username, winnerScore);
-                ScoreManager.AddScore(loser.Username, loserScore);
+                if (game.AreDefaultOptions()) {
+                    ScoreManager.AddScore(winner.Username, winnerScore);
+                    ScoreManager.AddScore(loser.Username, loserScore);
+                }
                 scoreSaved = true;
             }
-            int? winnerRank = GetLeaderboardRank(winner.Username, winnerScore);
-            if (winnerRank.HasValue) {
-                Vector2 winnerRankPos = winnerScorePos + new Vector2(0, 30);
-                Color rankColor = GetRankColor(winnerRank.Value);
-                spriteBatch.DrawString(game.TextFont, $"#{winnerRank.Value} du leaderboard !", winnerRankPos, rankColor);
-            }
-            int? loserRank = GetLeaderboardRank(loser.Username, loserScore);
-            if (loserRank.HasValue) {
-                Vector2 loserRankPos = loserScorePos + new Vector2(0, 30);
-                Color rankColor = GetRankColor(loserRank.Value);
-                spriteBatch.DrawString(game.TextFont, $"#{loserRank.Value} du leaderboard !", loserRankPos, rankColor);
+            if (game.AreDefaultOptions()) {
+                int? winnerRank = GetLeaderboardRank(winner.Username, winnerScore);
+                if (winnerRank.HasValue) {
+                    Vector2 winnerRankPos = winnerScorePos + new Vector2(0, 30);
+                    Color rankColor = GetRankColor(winnerRank.Value);
+                    spriteBatch.DrawString(game.TextFont, $"#{winnerRank.Value} du leaderboard !", winnerRankPos, rankColor);
+                }
+                int? loserRank = GetLeaderboardRank(loser.Username, loserScore);
+                if (loserRank.HasValue) {
+                    Vector2 loserRankPos = loserScorePos + new Vector2(0, 30);
+                    Color rankColor = GetRankColor(loserRank.Value);
+                    spriteBatch.DrawString(game.TextFont, $"#{loserRank.Value} du leaderboard !", loserRankPos, rankColor);
+                }
             }
             Texture2D winTexture = winner.GetTexture();
-            spriteBatch.Draw(winTexture, new Vector2(900, 350), null, Color.White, winner.Rotation,
+            spriteBatch.Draw(winTexture, new Vector2(game.ScreenResolution.X / 3 * 2, game.ScreenResolution.Y / 2), null, Color.White, winner.Rotation,
                 new Vector2(winTexture.Width / 2, winTexture.Height / 2), 4f, SpriteEffects.None, 0f);
 
             for (int i = 0; i < options.Length; i++) {

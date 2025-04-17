@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -41,8 +40,8 @@ namespace SpaceWar {
                 arenaBounds.Left + 3 * arenaBounds.Width / 4f,
                 arenaCenter.Y
             );
-            player1 = new Player(player1Username, leftHalfCenter, Keys.Z, Keys.Q, Keys.D, Keys.Space, Keys.LeftShift, 0, arenaBounds);
-            player2 = new Player(player2Username, rightHalfCenter, Keys.Up, Keys.Left, Keys.Right, Keys.RightControl, Keys.RightAlt, 1, arenaBounds);
+            player1 = new Player(player1Username, leftHalfCenter, Keys.Z, Keys.Q, Keys.D, Keys.Space, Keys.LeftShift, 0, arenaBounds, game.GameOptions);
+            player2 = new Player(player2Username, rightHalfCenter, Keys.Up, Keys.Left, Keys.Right, Keys.RightControl, Keys.RightAlt, 1, arenaBounds, game.GameOptions);
         }
 
         public override void LoadContent(ContentManager content) {
@@ -115,7 +114,7 @@ namespace SpaceWar {
             if (!gameStarted || showGo) {
                 string countdownText = countdown > 0 ? $"{countdown}" : "GO";
                 Vector2 textSize = game.MidFont.MeasureString(countdownText);
-                Vector2 textPosition = new Vector2(640, 300);
+                Vector2 textPosition = new Vector2(game.ScreenResolution.X / 2, game.ScreenResolution.Y / 2);
                 spriteBatch.DrawString(game.MidFont, countdownText, textPosition, Color.Teal, 0f,
                     textSize / 2f, 1f, SpriteEffects.None, 0f);
             }
@@ -125,13 +124,13 @@ namespace SpaceWar {
         }
 
         private void DrawBackground(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White);
-            spriteBatch.Draw(nebulaTexture, new Rectangle(0, 0, 1280, 720), Color.White);
-            for (int x = 0; x < 1280; x += stars1Texture.Width)
-                for (int y = 0; y < 720; y += stars1Texture.Height)
+            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, game.ScreenResolution.X, game.ScreenResolution.Y), Color.White);
+            spriteBatch.Draw(nebulaTexture, new Rectangle(0, 0, game.ScreenResolution.X, game.ScreenResolution.Y), Color.White);
+            for (int x = 0; x < game.ScreenResolution.X; x += stars1Texture.Width)
+                for (int y = 0; y < game.ScreenResolution.Y; y += stars1Texture.Height)
                     spriteBatch.Draw(stars1Texture, new Vector2(x, y), Color.White);
-            for (int x = 0; x < 1280; x += stars2Texture.Width)
-                for (int y = 0; y < 720; y += stars2Texture.Height)
+            for (int x = 0; x < game.ScreenResolution.X; x += stars2Texture.Width)
+                for (int y = 0; y < game.ScreenResolution.Y; y += stars2Texture.Height)
                     spriteBatch.Draw(stars2Texture, new Vector2(x, y), Color.White);
         }
 
@@ -139,7 +138,7 @@ namespace SpaceWar {
             const int barWidth = 235, healthBarHeight = 20, boostBarHeight = 5, maxHealth = 100;
 
             spriteBatch.DrawString(game.TextFont, player1.Username, new Vector2(10, 10), Color.White);
-            spriteBatch.DrawString(game.TextFont, player2.Username, new Vector2(1280 - barWidth - 10, 10), Color.White);
+            spriteBatch.DrawString(game.TextFont, player2.Username, new Vector2(game.ScreenResolution.X - barWidth - 10, 10), Color.White);
 
             float healthRatio1 = MathHelper.Clamp(player1.Health / (float)maxHealth, 0, 1);
             Rectangle bgBar1 = new Rectangle(10, 35, barWidth, healthBarHeight);
@@ -150,8 +149,8 @@ namespace SpaceWar {
             spriteBatch.Draw(pixel, fgBar1, barColor1);
 
             float healthRatio2 = MathHelper.Clamp(player2.Health / (float)maxHealth, 0, 1);
-            Rectangle bgBar2 = new Rectangle(1280 - barWidth - 10, 35, barWidth, healthBarHeight);
-            Rectangle fgBar2 = new Rectangle(1280 - barWidth - 10, 35, (int)(barWidth * healthRatio2), healthBarHeight);
+            Rectangle bgBar2 = new Rectangle(game.ScreenResolution.X - barWidth - 10, 35, barWidth, healthBarHeight);
+            Rectangle fgBar2 = new Rectangle(game.ScreenResolution.X - barWidth - 10, 35, (int)(barWidth * healthRatio2), healthBarHeight);
             spriteBatch.Draw(pixel, bgBar2, Color.DarkRed);
             spriteBatch.Draw(pixel, fgBar2, Color.Red);
             Color barColor2 = player2.IsFlashing ? Color.White : Color.Red;
@@ -164,19 +163,19 @@ namespace SpaceWar {
             spriteBatch.Draw(pixel, fgBoostBar1, Color.Yellow);
 
             float boostRatio2 = MathHelper.Clamp(player2.GetBoost() / player2.GetMaxBoost(), 0, 1);
-            Rectangle bgBoostBar2 = new Rectangle(1280 - barWidth - 10, healthBarHeight + 38, barWidth, boostBarHeight);
-            Rectangle fgBoostBar2 = new Rectangle(1280 - barWidth - 10, healthBarHeight + 38, (int)(barWidth * boostRatio2), boostBarHeight);
+            Rectangle bgBoostBar2 = new Rectangle(game.ScreenResolution.X - barWidth - 10, healthBarHeight + 38, barWidth, boostBarHeight);
+            Rectangle fgBoostBar2 = new Rectangle(game.ScreenResolution.X - barWidth - 10, healthBarHeight + 38, (int)(barWidth * boostRatio2), boostBarHeight);
             spriteBatch.Draw(pixel, bgBoostBar2, Color.DarkOrange);
             spriteBatch.Draw(pixel, fgBoostBar2, Color.Yellow);
 
             Color bulletTextColor1 = player1.GetBulletCount() == 0 ? Color.Red : Color.White;
             Color bulletTextColor2 = player2.GetBulletCount() == 0 ? Color.Red : Color.White;
             spriteBatch.DrawString(game.TextFont, $"Munitions: {player1.GetBulletCount()}", new Vector2(10, 65), bulletTextColor1);
-            spriteBatch.DrawString(game.TextFont, $"Munitions: {player2.GetBulletCount()}", new Vector2(1280 - barWidth - 10, 65), bulletTextColor2);
+            spriteBatch.DrawString(game.TextFont, $"Munitions: {player2.GetBulletCount()}", new Vector2(game.ScreenResolution.X - barWidth - 10, 65), bulletTextColor2);
 
             spriteBatch.Draw(player1.GetTexture(), new Vector2(barWidth + 50, 40), null, Color.White, player1.Rotation,
                 new Vector2(player1.GetTexture().Width / 2, player1.GetTexture().Height / 2), 1f, SpriteEffects.None, 0f);
-            spriteBatch.Draw(player2.GetTexture(), new Vector2(1280 - barWidth - 50, 40), null, Color.White, player2.Rotation,
+            spriteBatch.Draw(player2.GetTexture(), new Vector2(game.ScreenResolution.X - barWidth - 50, 40), null, Color.White, player2.Rotation,
                 new Vector2(player2.GetTexture().Width / 2, player2.GetTexture().Height / 2), 1f, SpriteEffects.None, 0f);
 
         }

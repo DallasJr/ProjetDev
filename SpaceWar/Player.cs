@@ -9,16 +9,13 @@ using Microsoft.Xna.Framework.Input;
 namespace SpaceWar {
     public class Player {
         
-        private const float Speed = 15f;
-        private const float BoostedSpeed = 30f;
         private const float FireCooldown = 0.25f;
         private const float SlowRotationSpeed = 0.025f;
         private const float FastRotationSpeed = 0.075f;
-        private const int MaxBullets = 5;
+        private const float Friction = 0.95f;
         private const float BulletRechargeInterval = 1f;
         private const float MaxBoost = 100f;
         private const float BoostRegenDelay = 3f;
-        private const float Friction = 0.95f;
         private const float HealthRegenDelay = 5f;
         private const float HealthRegenInterval = 2f;
 
@@ -79,11 +76,13 @@ namespace SpaceWar {
 
         private DodgeTracker dodgeTracker;
         public int Dodges => dodgeTracker?.Dodges ?? 0;
-        private List<Projectile> lastEnemyProjectiles = new();
 
         public bool Winner { get; set; } = false;
 
-        public Player(string username, Vector2 startPosition, Keys up, Keys left, Keys right, Keys fire, Keys boost, int index, Rectangle arenaBounds) {
+        public GameOptions GameOptions;
+
+        public Player(string username, Vector2 startPosition, Keys up, Keys left, Keys right, Keys fire, Keys boost, int index, Rectangle arenaBounds, GameOptions gameOptions) {
+            GameOptions = gameOptions;
             Username = username;
             Position = startPosition;
             Velocity = Vector2.Zero;
@@ -118,13 +117,13 @@ namespace SpaceWar {
         public void Update(GameTime gameTime) {
             KeyboardState  keyboard = Keyboard.GetState();
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            float speed = Speed;
+            float speed = GameOptions.Speed;
             float cosRotation = (float)Math.Cos(Rotation);
             float sinRotation = (float)Math.Sin(Rotation);
 
             isBoosting = false;
             if (keyboard.IsKeyDown(boostKey) && keyboard.IsKeyDown(forwardKey) && boost > 0) {
-                speed = BoostedSpeed;
+                speed = GameOptions.BoostedSpeed;
                 isBoosting = true;
                 boostKeyReleaseTimer = 0f;
             } else {
@@ -165,7 +164,7 @@ namespace SpaceWar {
                 }
             }
 
-            if (isBoosting) {
+            if (isBoosting && !GameOptions.InfiniteBoost) {
                 boost -= 60f * elapsedTime;
                 if (boost < 0) boost = 0;
             } else {
@@ -178,7 +177,7 @@ namespace SpaceWar {
             bulletRechargeTimer += elapsedTime;
             if (bulletRechargeTimer >= BulletRechargeInterval) {
                 bulletRechargeTimer = 0f;
-                if (bullets < MaxBullets) {
+                if (bullets < GameOptions.MaxBullets) {
                     bullets++;
                 }
             }
@@ -195,7 +194,6 @@ namespace SpaceWar {
         }
 
         public void UpdateDodging(List<Projectile> enemyProjectiles, float elapsedTime) {
-            lastEnemyProjectiles = enemyProjectiles;
             dodgeTracker.Update(enemyProjectiles, elapsedTime, Velocity);
         }
 
@@ -216,7 +214,7 @@ namespace SpaceWar {
             Vector2 offset = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)) * offsetDistance;
             Vector2 projectilePosition = Position + offset;
 
-            Projectile projectile = new Projectile(projectilePosition, Rotation, playerIndex, 10f);
+            Projectile projectile = new Projectile(projectilePosition, Rotation, playerIndex, GameOptions.BulletSpeed);
             projectile.LoadContent(contentManager);
             projectiles.Add(projectile);
             shootSound.Play(volume: 0.2f, pitch: 0f, pan: 0f);

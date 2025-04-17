@@ -1,0 +1,7 @@
+{
+  "Speed": 15,
+  "BoostedSpeed": 30,
+  "BulletSpeed": 10,
+  "MaxBullets": 5,
+  "InfiniteBoost": false
+}

@@ -126,18 +126,18 @@ namespace SpaceWar {
             DrawBackground(spriteBatch);
 
             Texture2D slide = instructionSlides[currentSlide];
-            Vector2 slidePos = new Vector2((1280 - slide.Width) / 2, (720 - slide.Height) / 2 - 50);
+            Vector2 slidePos = new Vector2((game.ScreenResolution.X - slide.Width) / 2, (game.ScreenResolution.Y - slide.Height) / 2 - 50);
             spriteBatch.Draw(slide, slidePos, Color.White);
 
-            Vector2 leftPos = new Vector2(100, 320);
-            Vector2 rightPos = new Vector2(1280 - 100 - rightArrow.Width, 320);
+            Vector2 leftPos = new Vector2(100, game.ScreenResolution.Y / 2);
+            Vector2 rightPos = new Vector2(game.ScreenResolution.X - 100 - rightArrow.Width, game.ScreenResolution.Y / 2);
             if (currentSlide > 0) {
                 DrawArrow(spriteBatch, leftArrow, leftPos, selectedIndex == 0);
             }
             if (currentSlide < instructionSlides.Count - 1) {
                 DrawArrow(spriteBatch, rightArrow, rightPos, selectedIndex == 1);
             }
-            Vector2 returnPos = new Vector2((1280 - game.TextFont.MeasureString(returnText).X) / 2, 650);
+            Vector2 returnPos = new Vector2((game.ScreenResolution.X - game.TextFont.MeasureString(returnText).X) / 2, game.ScreenResolution.Y - 120);
             Color returnColor = (selectedIndex == 2) ? Color.Yellow : Color.White;
             spriteBatch.DrawString(game.TextFont, (selectedIndex == 2 && showArrow) ? "> " + returnText : "  " + returnText, returnPos, returnColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
@@ -152,13 +152,13 @@ namespace SpaceWar {
         }
 
         private void DrawBackground(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White);
-            spriteBatch.Draw(nebulaTexture, new Rectangle(0, 0, 1280, 720), Color.White);
-            for (int x = 0; x < 1280; x += stars1Texture.Width)
-                for (int y = 0; y < 720; y += stars1Texture.Height)
+            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, game.ScreenResolution.X, game.ScreenResolution.Y), Color.White);
+            spriteBatch.Draw(nebulaTexture, new Rectangle(0, 0, game.ScreenResolution.X, game.ScreenResolution.Y), Color.White);
+            for (int x = 0; x < game.ScreenResolution.X; x += stars1Texture.Width)
+                for (int y = 0; y < game.ScreenResolution.Y; y += stars1Texture.Height)
                     spriteBatch.Draw(stars1Texture, new Vector2(x, y), Color.White);
-            for (int x = 0; x < 1280; x += stars2Texture.Width)
-                for (int y = 0; y < 720; y += stars2Texture.Height)
+            for (int x = 0; x < game.ScreenResolution.X; x += stars2Texture.Width)
+                for (int y = 0; y < game.ScreenResolution.Y; y += stars2Texture.Height)
                     spriteBatch.Draw(stars2Texture, new Vector2(x, y), Color.White);
         }
     }

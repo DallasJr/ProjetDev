@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.IO;
+using System.Text.Json;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace SpaceWar;
 
@@ -14,12 +16,24 @@ public class Game1 : Game
     public SpriteFont TitleFont { get; private set; }
     public SpriteFont MidFont { get; private set; }
 
+    public GameOptions GameOptions { get; set; }
+    public Point ScreenResolution = new Point(1280, 720);
+    public readonly GameOptions DefaultOptions = new() {
+        Speed = 15f,
+        BoostedSpeed = 30f,
+        MaxBullets = 5,
+        BulletSpeed = 10f,
+        InfiniteBoost = false
+    };
+
+    private static readonly string OptionsFilePath = "options.json";
+
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
-        _graphics.PreferredBackBufferWidth = 1280;
-        _graphics.PreferredBackBufferHeight = 720;
+        _graphics.PreferredBackBufferWidth = ScreenResolution.X;
+        _graphics.PreferredBackBufferHeight = ScreenResolution.Y;
         IsMouseVisible = true;
         _graphics.IsFullScreen = false;
     }
@@ -28,6 +42,7 @@ public class Game1 : Game
     {
         currentScreen = new MenuScreen(this);
         base.Initialize();
+        GameOptions = loadOptions();
     }
 
     protected override void LoadContent()
@@ -36,7 +51,6 @@ public class Game1 : Game
         TitleFont = Content.Load<SpriteFont>("TitleFont");
         MidFont = Content.Load<SpriteFont>("MidFont");
         TextFont = Content.Load<SpriteFont>("TextFont");
-        currentScreen.LoadContent(Content);
 
         currentScreen.LoadContent(Content);
     }
@@ -59,5 +73,36 @@ public class Game1 : Game
     public void ChangeScreen(Screen newScreen) {
         newScreen.LoadContent(Content);
         currentScreen = newScreen;
+    }
+
+    private GameOptions loadOptions() {
+        try {
+            if (File.Exists(OptionsFilePath)) {
+                string json = File.ReadAllText(OptionsFilePath);
+                return JsonSerializer.Deserialize<GameOptions>(json) ?? DefaultOptions;
+            }
+        } catch (Exception e) {
+            Console.WriteLine($"Erreur chargement options : {e.Message}");
+        }
+        return DefaultOptions;
+    }
+
+    public void SaveOptions(GameOptions options) {
+        try {
+            string json = JsonSerializer.Serialize(options, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(OptionsFilePath, json);
+        } catch (Exception e) {
+            Console.WriteLine($"Erreur sauvegarde options : {e.Message}");
+        }
+    }
+
+    public bool AreDefaultOptions() {
+        GameOptions currentOptions = GameOptions;
+        GameOptions defaultOptions = DefaultOptions;
+        return currentOptions.Speed == defaultOptions.Speed &&
+            currentOptions.BoostedSpeed == defaultOptions.BoostedSpeed &&
+            currentOptions.MaxBullets == defaultOptions.MaxBullets &&
+            currentOptions.BulletSpeed == defaultOptions.BulletSpeed &&
+            currentOptions.InfiniteBoost == defaultOptions.InfiniteBoost;
     }
 }

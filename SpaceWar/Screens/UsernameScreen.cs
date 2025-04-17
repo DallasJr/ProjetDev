@@ -141,7 +141,7 @@ namespace SpaceWar {
         }
 
         private void DrawPlayerNames(SpriteBatch spriteBatch) {
-            Vector2 labelPos1 = new Vector2(150, 220);
+            Vector2 labelPos1 = new Vector2(game.ScreenResolution.X / 6, 220);
             Vector2 checkMarkOffset = new Vector2(190, 0);
             spriteBatch.DrawString(game.MidFont, $"Joueur 1:", labelPos1, Color.White);
             if (playerReady[0]) {
@@ -149,24 +149,24 @@ namespace SpaceWar {
                 spriteBatch.Draw(checkMarkTexture, checkPos, null, Color.White, 0f, Vector2.Zero, 3f, SpriteEffects.None, 0f);
 
             }
-            Vector2 namePos1 = new Vector2(150, 300);
+            Vector2 namePos1 = new Vector2(game.ScreenResolution.X / 6, 300);
             string nameDisplay1 = playerNames[0].PadRight(maxNameLength, '_');
             spriteBatch.DrawString(game.TextFont, $"{nameDisplay1}", namePos1, Color.White);
 
-            Vector2 labelPos2 = new Vector2(800, 220);
+            Vector2 labelPos2 = new Vector2(game.ScreenResolution.X / 6 * 4 - 50, 220);
             spriteBatch.DrawString(game.MidFont, $"Joueur 2:", labelPos2, Color.White);
             if (playerReady[1]) {
                 Vector2 checkPos = labelPos2 + checkMarkOffset;
                 spriteBatch.Draw(checkMarkTexture, checkPos, null, Color.White, 0f, Vector2.Zero, 3f, SpriteEffects.None, 0f);
             }
-            Vector2 namePos2 = new Vector2(800, 300);
+            Vector2 namePos2 = new Vector2(game.ScreenResolution.X / 6 * 4 - 50, 300);
             string nameDisplay2 = playerNames[1].PadRight(maxNameLength, '_');
             spriteBatch.DrawString(game.TextFont, $"{nameDisplay2}", namePos2, Color.White);
 
         }
 
         private void DrawLetterGrid(SpriteBatch spriteBatch) {
-            Vector2 gridOrigin = new Vector2(300, 400);
+            Vector2 gridOrigin = new Vector2(game.ScreenResolution.X / 4, game.ScreenResolution.Y / 5 * 3);
             int cellSize = 50;
 
             for (int i = 0; i < letters.Length; i++) {
@@ -185,7 +185,7 @@ namespace SpaceWar {
         }
 
         private void DrawSpecialButtons(SpriteBatch spriteBatch) {
-            Vector2 gridOrigin = new Vector2(300, 400);
+            Vector2 gridOrigin = new Vector2(game.ScreenResolution.X / 4, game.ScreenResolution.Y / 5 * 3);
             int cellSize = 50;
             float spacing = 60f;
 
@@ -233,13 +233,13 @@ namespace SpaceWar {
 
 
         private void DrawBackground(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White);
-            spriteBatch.Draw(nebulaTexture, new Rectangle(0, 0, 1280, 720), Color.White);
-            for (int x = 0; x < 1280; x += stars1Texture.Width)
-                for (int y = 0; y < 720; y += stars1Texture.Height)
+            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, game.ScreenResolution.X, game.ScreenResolution.Y), Color.White);
+            spriteBatch.Draw(nebulaTexture, new Rectangle(0, 0, game.ScreenResolution.X, game.ScreenResolution.Y), Color.White);
+            for (int x = 0; x < game.ScreenResolution.X; x += stars1Texture.Width)
+                for (int y = 0; y < game.ScreenResolution.Y; y += stars1Texture.Height)
                     spriteBatch.Draw(stars1Texture, new Vector2(x, y), Color.White);
-            for (int x = 0; x < 1280; x += stars2Texture.Width)
-                for (int y = 0; y < 720; y += stars2Texture.Height)
+            for (int x = 0; x < game.ScreenResolution.X; x += stars2Texture.Width)
+                for (int y = 0; y < game.ScreenResolution.Y; y += stars2Texture.Height)
                     spriteBatch.Draw(stars2Texture, new Vector2(x, y), Color.White);
         }
     }

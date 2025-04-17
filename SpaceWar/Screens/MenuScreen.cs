@@ -73,6 +73,9 @@ namespace SpaceWar {
                         case 1:
                             game.ChangeScreen(new InstructionsScreen(game));
                             break;
+                        case 2:
+                            game.ChangeScreen(new OptionsScreen(game));
+                            break;
                         default:
                             game.Exit();
                             break;
@@ -155,7 +158,7 @@ namespace SpaceWar {
             DrawBackground(spriteBatch);
             foreach (var ship in activeSpaceships)
                 ship.Draw(spriteBatch);
-            Vector2 leaderboardTitlePos = new Vector2(750, 150);
+            Vector2 leaderboardTitlePos = new Vector2((game.ScreenResolution.X / 3 * 2) - 100, 150);
             Vector2 menuPos = new Vector2(100, 300);
             Vector2 titlePos = new Vector2(100, 100);
             string title = "SpaceWar";
@@ -202,13 +205,13 @@ namespace SpaceWar {
         }
 
         private void DrawBackground(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White);
-            spriteBatch.Draw(nebulaTexture, new Rectangle(0, 0, 1280, 720), Color.White);
-            for (int x = 0; x < 1280; x += stars1Texture.Width)
-                for (int y = 0; y < 720; y += stars1Texture.Height)
+            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, game.ScreenResolution.X, game.ScreenResolution.Y), Color.White);
+            spriteBatch.Draw(nebulaTexture, new Rectangle(0, 0, game.ScreenResolution.X, game.ScreenResolution.Y), Color.White);
+            for (int x = 0; x < game.ScreenResolution.X; x += stars1Texture.Width)
+                for (int y = 0; y < game.ScreenResolution.Y; y += stars1Texture.Height)
                     spriteBatch.Draw(stars1Texture, new Vector2(x, y), Color.White);
-            for (int x = 0; x < 1280; x += stars2Texture.Width)
-                for (int y = 0; y < 720; y += stars2Texture.Height)
+            for (int x = 0; x < game.ScreenResolution.X; x += stars2Texture.Width)
+                for (int y = 0; y < game.ScreenResolution.Y; y += stars2Texture.Height)
                     spriteBatch.Draw(stars2Texture, new Vector2(x, y), Color.White);
         }
     }
