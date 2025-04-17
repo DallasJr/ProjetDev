@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/TextFont.spritefont</SourceFile>
-  <SourceTime>2025-04-14T17:43:59.8811602+02:00</SourceTime>
-  <DestFile>C:/Users/dalla/Desktop/Cours YNOV/ProDev/SpaceWar/Content/bin/DesktopGL/Content/TextFont.xnb</DestFile>
-  <DestTime>2025-04-14T17:44:17.0623158+02:00</DestTime>
+  <SourceFile>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/TextFont.spritefont</SourceFile>
+  <SourceTime>2025-04-17T00:14:05.3914802+02:00</SourceTime>
+  <DestFile>C:/Users/Jr/Documents/ProjetDev/SpaceWar/Content/bin/DesktopGL/Content/TextFont.xnb</DestFile>
+  <DestTime>2025-04-17T00:20:24.11691+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2024-08-16T19:05:56+02:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

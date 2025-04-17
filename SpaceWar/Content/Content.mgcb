@@ -229,6 +229,18 @@
 /processorParam:Quality=Best
 /build:laser.wav
 
+#begin left_arrow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:left_arrow.png
+
 #begin main_idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -391,6 +403,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:red_01.png
+
+#begin right_arrow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:right_arrow.png
 
 #begin sec_idle.png
 /importer:TextureImporter

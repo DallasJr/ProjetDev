@@ -15,7 +15,7 @@ namespace SpaceWar {
 
         private bool showArrow = true;
         private int selectedIndex = -1;
-        private string[] options = { "Jouer", "Options", "Instructions", "Quitter" };
+        private string[] options = { "Jouer", "Instructions", "Options", "Quitter" };
 
         private List<Texture2D> spaceshipTextures;
         private List<Spaceship> activeSpaceships = new();
@@ -54,18 +54,24 @@ namespace SpaceWar {
             if (selectedIndex == -1) {
                 if (currentKeyboard.IsKeyDown(Keys.Down) || currentKeyboard.IsKeyDown(Keys.S) || currentKeyboard.IsKeyDown(Keys.Z) || currentKeyboard.IsKeyDown(Keys.Up)) {
                     selectedIndex = 0;
+                    setCursorVisibility(true);
                 }
             } else {
                 if (IsKeyPressed(currentKeyboard, Keys.Down) || IsKeyPressed(currentKeyboard, Keys.S)) {
                     selectedIndex = (selectedIndex + 1) % options.Length;
+                    setCursorVisibility(true);
                 }
                 if (IsKeyPressed(currentKeyboard, Keys.Up) || IsKeyPressed(currentKeyboard, Keys.Z)) {
                     selectedIndex = (selectedIndex - 1 + options.Length) % options.Length;
+                    setCursorVisibility(true);
                 }
                 if (IsKeyPressed(currentKeyboard, Keys.Space) || IsKeyPressed(currentKeyboard, Keys.RightAlt)) {
                     switch (selectedIndex) {
                         case 0:
                             game.ChangeScreen(new UsernameScreen(game));
+                            break;
+                        case 1:
+                            game.ChangeScreen(new InstructionsScreen(game));
                             break;
                         default:
                             game.Exit();
@@ -76,8 +82,7 @@ namespace SpaceWar {
 
             blinkTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (blinkTimer >= 0.5f) {
-                showArrow = !showArrow;
-                blinkTimer = 0f;
+                setCursorVisibility(!showArrow);
             }
             trophyTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             shineOffset += (float)gameTime.ElapsedGameTime.TotalSeconds * 2f;
@@ -135,6 +140,11 @@ namespace SpaceWar {
                     activeSpaceships.RemoveAt(i);
             }
 
+        }
+
+        private void setCursorVisibility(bool show) {
+            showArrow = show;
+            blinkTimer = 0f;
         }
 
         private bool IsKeyPressed(KeyboardState current, Keys key) {
