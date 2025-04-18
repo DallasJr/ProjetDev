@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,6 +28,7 @@ namespace SpaceWar {
         private int selectedIndex = -1;
         private string[] options = { "Rejouer", "Retour au menu" };
         private bool scoreSaved = false;
+        private List<ScoreEntry> leaderboardScores;
 
         public EndScreen(Game1 game, Player p1, Player p2, float gameDuration) : base(game) {
             player1 = p1;
@@ -42,7 +43,6 @@ namespace SpaceWar {
             stars1Texture = content.Load<Texture2D>("stars_1");
             stars2Texture = content.Load<Texture2D>("stars_2");
             trophyTexture = content.Load<Texture2D>("trophy");
-
         }
 
         private KeyboardState previousKeyboard;
@@ -129,6 +129,7 @@ namespace SpaceWar {
                 if (game.AreDefaultOptions()) {
                     ScoreManager.AddScore(winner.Username, winnerScore);
                     ScoreManager.AddScore(loser.Username, loserScore);
+                    leaderboardScores = ScoreManager.LoadScores();
                 }
                 scoreSaved = true;
             }
@@ -194,13 +195,9 @@ namespace SpaceWar {
             return (int)finalScore;
         }
 
-        private int? GetLeaderboardRank(string name, int score){
-            var scores = ScoreManager.LoadScores()
-                .OrderByDescending(s => s.Score)
-                .ToList();
-
-            for (int i = 0; i < scores.Count && i < 10; i++) {
-                if (scores[i].Name == name && scores[i].Score == score) {
+        private int? GetLeaderboardRank(string name, int score) {
+            for (int i = 0; i < leaderboardScores.Count && i < 10; i++) {
+                if (leaderboardScores[i].Name == name && leaderboardScores[i].Score == score) {
                     return i + 1;
                 }
             }
