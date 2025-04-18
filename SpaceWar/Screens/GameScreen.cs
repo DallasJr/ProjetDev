@@ -168,10 +168,10 @@ namespace SpaceWar {
             spriteBatch.Draw(pixel, bgBoostBar2, Color.DarkOrange);
             spriteBatch.Draw(pixel, fgBoostBar2, Color.Yellow);
 
-            Color bulletTextColor1 = player1.GetBulletCount() == 0 ? Color.Red : Color.White;
-            Color bulletTextColor2 = player2.GetBulletCount() == 0 ? Color.Red : Color.White;
-            spriteBatch.DrawString(game.TextFont, $"Munitions: {player1.GetBulletCount()}", new Vector2(10, 65), bulletTextColor1);
-            spriteBatch.DrawString(game.TextFont, $"Munitions: {player2.GetBulletCount()}", new Vector2(game.ScreenResolution.X - barWidth - 10, 65), bulletTextColor2);
+            Color bulletTextColor1 = player1.Bullets == 0 ? Color.Red : Color.White;
+            Color bulletTextColor2 = player2.Bullets == 0 ? Color.Red : Color.White;
+            spriteBatch.DrawString(game.TextFont, $"Munitions: {player1.Bullets}", new Vector2(10, 65), bulletTextColor1);
+            spriteBatch.DrawString(game.TextFont, $"Munitions: {player2.Bullets}", new Vector2(game.ScreenResolution.X - barWidth - 10, 65), bulletTextColor2);
 
             spriteBatch.Draw(player1.GetTexture(), new Vector2(barWidth + 50, 40), null, Color.White, player1.Rotation,
                 new Vector2(player1.GetTexture().Width / 2, player1.GetTexture().Height / 2), 1f, SpriteEffects.None, 0f);

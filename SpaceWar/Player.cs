@@ -23,7 +23,6 @@ namespace SpaceWar {
         public Vector2 Velocity;
         public float Rotation;
         private int health = 100;
-        private int bullets = 0;
         public string Username;
         private float bulletRechargeTimer = 0f;
         private float healthRegenTimer = 0f;
@@ -60,12 +59,12 @@ namespace SpaceWar {
                 health = value;
             }
         }
+        public int Bullets { get; set; }
 
         public bool IsFlashing => hitFlashTimer > 0;
 
         public Texture2D GetTexture() => texture;
 
-        public int GetBulletCount() => bullets;
         public float GetBoost() => boost;
         public float GetMaxBoost() => MaxBoost;
 
@@ -120,7 +119,7 @@ namespace SpaceWar {
             float speed = GameOptions.Speed;
             float cosRotation = (float)Math.Cos(Rotation);
             float sinRotation = (float)Math.Sin(Rotation);
-
+            // Movement handling
             isBoosting = false;
             if (keyboard.IsKeyDown(boostKey) && keyboard.IsKeyDown(forwardKey) && boost > 0) {
                 speed = GameOptions.BoostedSpeed;
@@ -148,14 +147,15 @@ namespace SpaceWar {
             Velocity *= Friction;
             Position += Velocity;
             Position = Vector2.Clamp(Position, new Vector2(arenaBounds.Left, arenaBounds.Top), new Vector2(arenaBounds.Right, arenaBounds.Bottom));
-
+            // Shooting handling
             if (keyboard.IsKeyDown(fireKey) && gameTime.TotalGameTime.TotalSeconds - lastFireTime > FireCooldown) {
-                if (bullets > 0) {
+                if (Bullets > 0) {
                     FireProjectile();
-                    bullets--;
+                    Bullets--;
                     lastFireTime = (float)gameTime.TotalGameTime.TotalSeconds;
                 }
             }
+            // Projectile handling
             for (int i = projectiles.Count - 1; i >= 0; i--) {
                 var projectile = projectiles[i];
                 projectile.Update(gameTime);
@@ -163,7 +163,7 @@ namespace SpaceWar {
                     projectiles.RemoveAt(i);
                 }
             }
-
+            // Boost handling
             if (isBoosting && !GameOptions.InfiniteBoost) {
                 boost -= 60f * elapsedTime;
                 if (boost < 0) boost = 0;
@@ -173,15 +173,15 @@ namespace SpaceWar {
                     boost = Math.Min(boost + boostIncrement, MaxBoost);
                 }
             }
-
+            // Bullet regeneration
             bulletRechargeTimer += elapsedTime;
             if (bulletRechargeTimer >= BulletRechargeInterval) {
                 bulletRechargeTimer = 0f;
-                if (bullets < GameOptions.MaxBullets) {
-                    bullets++;
+                if (Bullets < GameOptions.MaxBullets) {
+                    Bullets++;
                 }
             }
-
+            // Health regeneration
             healthRegenTimer += elapsedTime;
             if (healthRegenTimer >= HealthRegenDelay + HealthRegenInterval && !Winner) {
                 healthRegenTimer = HealthRegenDelay;

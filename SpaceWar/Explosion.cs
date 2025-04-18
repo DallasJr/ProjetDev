@@ -16,6 +16,7 @@ namespace SpaceWar {
         }
 
         public void LoadContent(ContentManager content) {
+            // Load the 8 frames of the explosion (explosion-1, explosion-2, ...)
             frames = new Texture2D[8];
             for (int i = 0; i < 8; i++) {
                 frames[i] = content.Load<Texture2D>($"explosion-{i + 1}");
@@ -24,7 +25,7 @@ namespace SpaceWar {
 
         public void Update(GameTime gameTime) {
             if (isExpired) return;
-
+            // Scroll frames
             frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (frameTimer >= frameDuration) {
                 frameTimer = 0f;
@@ -37,6 +38,7 @@ namespace SpaceWar {
 
         public void Draw(SpriteBatch spriteBatch) {
             if (!isExpired && currentFrame < frames.Length) {
+                // Display current frame
                 Texture2D currentTexture = frames[currentFrame];
                 spriteBatch.Draw(currentTexture, Position, null, Color.White, 0f,
                     new Vector2(currentTexture.Width / 2, currentTexture.Height / 2), 1f, SpriteEffects.None, 0f);
