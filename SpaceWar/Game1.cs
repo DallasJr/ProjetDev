@@ -3,8 +3,6 @@ using System.IO;
 using System.Text.Json;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Device.Gpio; // GPIO:
-using System.Threading;   // GPIO:
 
 namespace SpaceWar;
 
@@ -14,17 +12,13 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private Screen currentScreen;
 
-    private GpioController gpio; // GPIO:
-    private int upPin = 17, downPin = 27, actionPin = 22; // GPIO:
-
     public SpriteFont TextFont { get; private set; }
     public SpriteFont TitleFont { get; private set; }
     public SpriteFont MidFont { get; private set; }
 
     public GameOptions GameOptions { get; set; }
     public Point ScreenResolution = new Point(1280, 720);
-    public readonly GameOptions DefaultOptions = new()
-    {
+    public readonly GameOptions DefaultOptions = new() {
         Speed = 15f,
         BoostedSpeed = 30f,
         MaxBullets = 5,
@@ -49,12 +43,6 @@ public class Game1 : Game
         currentScreen = new MenuScreen(this);
         base.Initialize();
         GameOptions = loadOptions();
-
-        // GPIO:
-        gpio = new GpioController();
-        gpio.OpenPin(upPin, PinMode.InputPullUp);
-        gpio.OpenPin(downPin, PinMode.InputPullUp);
-        gpio.OpenPin(actionPin, PinMode.InputPullUp);
     }
 
     protected override void LoadContent()
@@ -69,23 +57,6 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        // GPIO: Lecture des boutons
-        if (gpio.Read(upPin) == PinValue.Low)
-        {
-            Console.WriteLine("GPIO: bouton HAUT pressé");
-            // Tu peux appeler ici une méthode dans currentScreen pour bouger ou déclencher une action
-        }
-
-        if (gpio.Read(downPin) == PinValue.Low)
-        {
-            Console.WriteLine("GPIO: bouton BAS pressé");
-        }
-
-        if (gpio.Read(actionPin) == PinValue.Low)
-        {
-            Console.WriteLine("GPIO: bouton ACTION pressé");
-        }
-
         currentScreen.Update(gameTime);
         base.Update(gameTime);
     }
@@ -99,44 +70,33 @@ public class Game1 : Game
         base.Draw(gameTime);
     }
 
-    public void ChangeScreen(Screen newScreen)
-    {
+    public void ChangeScreen(Screen newScreen) {
         newScreen.LoadContent(Content);
         currentScreen = newScreen;
     }
 
-    private GameOptions loadOptions()
-    {
-        try
-        {
-            if (File.Exists(OptionsFilePath))
-            {
+    private GameOptions loadOptions() {
+        try {
+            if (File.Exists(OptionsFilePath)) {
                 string json = File.ReadAllText(OptionsFilePath);
                 return JsonSerializer.Deserialize<GameOptions>(json) ?? DefaultOptions;
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Console.WriteLine($"Erreur chargement options : {e.Message}");
         }
         return DefaultOptions;
     }
 
-    public void SaveOptions(GameOptions options)
-    {
-        try
-        {
+    public void SaveOptions(GameOptions options) {
+        try {
             string json = JsonSerializer.Serialize(options, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(OptionsFilePath, json);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Console.WriteLine($"Erreur sauvegarde options : {e.Message}");
         }
     }
 
-    public bool AreDefaultOptions()
-    {
+    public bool AreDefaultOptions() {
         GameOptions currentOptions = GameOptions;
         GameOptions defaultOptions = DefaultOptions;
         return currentOptions.Speed == defaultOptions.Speed &&
