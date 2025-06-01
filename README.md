@@ -7,6 +7,7 @@ SpaceWar est un jeu arcade de type 1v1 en split-screen, où deux joueurs s'affro
 - **C#**: Langage de programmation principal utilisé pour développer la logique.
 - **Microsoft Visual Studio Code**: IDE utilisé pour développer.
 - **SoundEffect**: Pour la gestion des effets sonores (comme les tirs de laser).
+- **SQLite**: Stockage du leaderboard.
 
 ### Fonctionnalités majeurs
 
