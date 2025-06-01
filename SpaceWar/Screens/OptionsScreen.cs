@@ -58,7 +58,7 @@ namespace SpaceWar {
             if (IsKeyPressed(current, Keys.Right) || IsKeyPressed(current, Keys.D))
                 ModifyValue(1);
 
-            if (IsKeyPressed(current, Keys.Space)) {
+            if (IsKeyPressed(current, Keys.Space) || IsKeyPressed(current, Keys.RightAlt)) {
                 if (selectedIndex == labels.Length - 1) {
                     game.ChangeScreen(new MenuScreen(game));
                 } else if (selectedIndex == labels.Length - 2) {
