@@ -84,6 +84,13 @@ dotnet build
 dotnet run --project SpaceWar
 ```
 
+### Commandes
+**Joueur 1**
+ZQSD - Shift - Espace
+
+**Joueur 2**
+↑←↓→ - Right Alt - Right Ctrl
+
 Projet Dev - YNOV CAMPUS Paris
 
 Développeurs: Dallas, Clément
